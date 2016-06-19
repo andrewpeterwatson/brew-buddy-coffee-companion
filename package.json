@@ -7,8 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "./node_modules/eslint/bin/eslint.js ./",
+    "test": "./node_modules/mocha/bin/mocha "
   },
   "repository": {
     "type": "git",
