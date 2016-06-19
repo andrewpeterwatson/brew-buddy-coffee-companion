@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "4.4.3"
+services:
+  - mongodb
+before-script:
+  - npm install
+script:
+  - npm run lint
+  - npm test
