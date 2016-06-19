@@ -1,0 +1,34 @@
+{
+  "name": "brew-buddy-coffee-companion",
+  "version": "0.0.1",
+  "description": "diary for your coffee",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyleschnirring/brew-buddy-coffee-companion.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyleschnirring/brew-buddy-coffee-companion/issues"
+  },
+  "homepage": "https://github.com/kyleschnirring/brew-buddy-coffee-companion#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-nodemon": "^2.1.0",
+    "superagent": "^2.0.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
