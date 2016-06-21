@@ -6,7 +6,7 @@ process.env.MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/test';
 const expect = require('chai').expect;
 const request = require('superagent-use');
 const superPromise = require('superagent-promise-plugin');
-const debug = require('debug')('authlab:auth-router-test');
+const debug = require('debug')('brewbuddie:auth-router-test');
 const userController = require('../controller/user-controller');
 const authController = require('../controller/auth-controller');
 

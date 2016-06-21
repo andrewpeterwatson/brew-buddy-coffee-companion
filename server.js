@@ -4,7 +4,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const httpErrors = require('http-errors');
-const debug = require('debug')('authdemo:server');
+const debug = require('debug')('brewbuddie:server');
 
 const handleError = require('./lib/app-error');
 const parserBearerAuth = require('./lib/parse-bearer-auth');

@@ -1,7 +1,7 @@
 'use strict';
 
 const Router = require('express').Router;
-const debug = require('debug')('authlab:auth-router');
+const debug = require('debug')('brewbuddie:auth-router');
 const authController = require('../controller/auth-controller');
 const parseBasicAuth = require('../lib/parse-basic-auth');
 const jsonParser = require('body-parser').json();
