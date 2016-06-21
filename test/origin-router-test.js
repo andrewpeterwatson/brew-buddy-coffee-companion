@@ -90,5 +90,85 @@ describe('testing module origin-router', () => {
     });
 
     //begin testing here
+    describe('testing /api/origin', () => {
+      describe('POST /api/origin', () => {
+        it('should return an origin', (done) => {
+          done();
+        });
+
+        it('should return a 400 if no origin is sent', (done) => {
+          done();
+        });
+
+        it('should return a 401 if no origin is sent', (done) => {
+          done();
+        });
+
+        it('should return a 404 if no origin is found', (done) => {
+          done();
+        });
+      });
+
+      describe('PUT /api/origin/:id', () => {
+        it('should return the modified origin', (done) => {
+          done();
+        });
+
+        it('should return 401 if no token is provided', (done) => {
+          done();
+        });
+
+        it('should return 400 if no origin is sent', (done) => {
+          done();
+        });
+
+        it('should return 404 if no origin is found', (done) => {
+          done();
+        });
+
+      });
+
+      describe('GET /api/origin', () => {
+        it('should return a origin', (done) => {
+          done();
+        });
+
+        it('should return a 404 if no origin is found', (done) => {
+          done();
+        });
+
+        it('should return a 400 if no origin is sent', (done) => {
+          done();
+        });
+
+        it('should return a 401 if no token is sent', (done) => {
+          done();
+        });
+      });
+
+      describe('GET /api/origin/all', () => {
+        it('should return an array of origins' (done) => {
+          done();
+        })
+      })
+
+      describe('DELETE /api/origin/:id', () => {
+        it('should return a 204 status', (done) => {
+          done();
+        })
+
+        it('should return a 404 if no team is found', () => {
+          done();
+        })
+
+        it('should return a 401 if no token is sent', () => {
+          done();
+        })
+
+        it('should return a 400 if no origin is sent', () => {
+          done();
+        })
+      })
+    });
   });
 });
