@@ -106,14 +106,14 @@ describe('testing module auth-router', () => {
 
   describe('testing GET /api/signin', () => {
     before((done) => {
-      debug('before GET /api/signup');
+      debug('before GET /api/signin');
       authController.signup({username: 'rimraf', password:'farmir'})
       .then(() => done())
       .catch(done);
     });
 
     after((done) => {
-      debug('after GET /api/signup');
+      debug('after GET /api/signin');
       userController.removeAllUsers()
       .then(() => done())
       .catch(done);
