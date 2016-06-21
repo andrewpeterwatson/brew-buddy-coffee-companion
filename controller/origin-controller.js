@@ -27,7 +27,7 @@ exports.fetchOrigin = function(originId) {
 exports.updateOrigin = function(originId, reqBody) {
   debug('updating origin', originId);
   return new Promise((resolve, reject) => {
-    if (Object.keys(reqBody).length === 0) return reject(httpErrors(r00, 'need to provide a body'));
+    if (Object.keys(reqBody).length === 0) return reject(httpErrors(400, 'need to provide a body'));
 
     const originKeys = ['country', 'recMethod'];
     Object.keys(reqBody).forEach((key) => {
@@ -49,7 +49,7 @@ exports.removeOrigin = function(originId) {
   });
 };
 
-exports.fetchAllOrigin = function() {
+exports.fetchAllOrigins = function() {
   debug('fetching all origins');
   return new Promise((resolve, reject) => {
     Origin.find({})
