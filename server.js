@@ -4,12 +4,12 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const httpErrors = require('http-errors');
-const debug = require('debug')('authdemo:server');
+const debug = require('debug')('brewbuddie:server');
 
-const handleError = require('./lib/handle-error');
+const handleError = require('./lib/app-error');
 const parserBearerAuth = require('./lib/parse-bearer-auth');
-const authRouter = require('./route/auth-router');
-//TBD 
+const authRouter = require('./routes/auth-route');
+//TBD
 
 const app = express();
 const port = process.env.PORT || 3000;
