@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('debug')('brewbuddie:auth-controller');
+const debug = require('debug')('brewBuddy:auth-controller');
 const httpErrors = require('http-errors');
 const User = require('../model/user');
 
