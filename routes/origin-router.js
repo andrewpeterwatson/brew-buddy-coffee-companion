@@ -20,7 +20,7 @@ originRouter.post('/origin', parseBearerAuth, jsonParser, (req, res, next) => {
 
 originRouter.get('/origin/all', parseBearerAuth, (req, res, next) => {
   debug('GET /api/origin/all');
-  originRouter.fetchAllOrigins()
+  originController.fetchAllOrigins()
   .then((origins) => {
     res.json(origins);
   })

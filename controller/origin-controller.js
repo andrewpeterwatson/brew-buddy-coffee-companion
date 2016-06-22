@@ -34,7 +34,7 @@ exports.updateOrigin = function(originId, reqBody) {
       if (originKeys.indexOf(key) === -1) return reject(httpErrors(400, 'key does not exist'));
     });
 
-    Origin.findByIdandUpdate(originId, reqBody)
+    Origin.findByIdAndUpdate(originId, reqBody)
     .then(() => Origin.findOne({_id: originId}).then(resolve))
     .catch(err => reject(httpErrors(404, err.message)));
   });
