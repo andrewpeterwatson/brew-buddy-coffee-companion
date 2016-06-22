@@ -238,7 +238,6 @@ describe('testing module origin-router', () => {
       });
 
       describe('GET /api/origin/all', () => {
-        let testOrigins = [];
         before((done) => {
           Promise.all([
             originController.createOrigin({
