@@ -9,6 +9,8 @@ const debug = require('debug')('brewbuddie:server');
 const handleError = require('./lib/app-error');
 const parserBearerAuth = require('./lib/parse-bearer-auth');
 const authRouter = require('./routes/auth-route');
+
+const originRouter = require('./routes/origin-router');
 const brewMethodRouter = require('./routes/brew-method-routes');
 const entryRouter = require('./routes/entry-route');
 
@@ -25,6 +27,7 @@ app.all('/', parserBearerAuth, function(req, res){
 });
 
 app.use('/api', authRouter);
+app.use('/api', originRouter);
 app.use('/api', brewMethodRouter);
 app.use('/api', entryRouter);
 

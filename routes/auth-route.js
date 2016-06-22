@@ -1,7 +1,7 @@
 'use strict';
 
 const Router = require('express').Router;
-const debug = require('debug')('brewbuddie:auth-router');
+const debug = require('debug')('brewBuddy:auth-router');
 const authController = require('../controller/auth-controller');
 const parseBasicAuth = require('../lib/parse-basic-auth');
 const jsonParser = require('body-parser').json();
@@ -9,7 +9,7 @@ const jsonParser = require('body-parser').json();
 const authRouter = module.exports = new Router();
 
 authRouter.post('/signup', jsonParser, (req, res, next) => {
-  debug('posting signup');
+  debug('posting signup', req.body);
   authController.signup(req.body)
   .then(token => res.send(token))
   .catch(next);

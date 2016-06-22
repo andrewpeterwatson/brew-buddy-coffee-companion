@@ -11,7 +11,7 @@ const brewMethodController = require('../controller/brew-method-controller');
 const brewMethodRouter = module.exports = new Router();
 
 brewMethodRouter.post('/method', parseBearerAuth, jsonParser, function(req, res, next) {
-  debug('POST /api/brewmethod');
+  debug('POST /api/method');
   req.body.userId = req.userId;
   brewMethodController.createBrewMethod(req.body)
   .then(brewMethod => res.json(brewMethod))

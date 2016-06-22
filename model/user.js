@@ -2,19 +2,19 @@
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const debug = require('debug')('brewbuddie:user');
+const debug = require('debug')('brewBuddy:user');
 const httpErrors = require('http-errors');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
   username: {type: String, required: true, unique:true},
-  password: {type: String, required: true},
+  password: {type: String},
   findHash: {type: String, unique: true}
 });
 
 userSchema.methods.generateHash = function(password){
-  debug('generateHash');
+  debug('generateHash', password);
   return new Promise((resolve, reject) => {
     if (!password) return reject(httpErrors(400, 'must provide password'));
     bcrypt.hash(password, 8, (err, hash) => {
