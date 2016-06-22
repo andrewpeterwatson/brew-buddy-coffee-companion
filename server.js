@@ -10,7 +10,7 @@ const handleError = require('./lib/app-error');
 const parserBearerAuth = require('./lib/parse-bearer-auth');
 const authRouter = require('./routes/auth-route');
 const brewMethodRouter = require('./routes/brew-method-routes');
-//TBD
+const entryRouter = require('./routes/entry-route');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -26,6 +26,7 @@ app.all('/', parserBearerAuth, function(req, res){
 
 app.use('/api', authRouter);
 app.use('/api', brewMethodRouter);
+app.use('/api', entryRouter);
 
 app.all('*', function(req, res, next){
   debug('404 * route');
