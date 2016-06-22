@@ -90,6 +90,150 @@ describe('testing brew-method-routes', function() {
           done();
         }).catch(done);
       });
+
+      it('should return a 401', (done) => {
+        request.post(`${baseUrl}/method`)
+        .send({
+          title: 'Kalita Wave'
+          , recipe: 'The right way'
+          , brewTimer: 2
+        })
+        .then(done)
+        .catch(err => {
+          const res = err.response;
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+
+
+      it('should return a 400, BAD REQUEST', (done) => {
+        request.post(`${baseUrl}/method`)
+        .send({
+          title: 'bad',
+          recipe: 'request',
+          brewTimer: null
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then(done)
+        .catch(err => {
+          const res = err.response;
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('testing GET api/method/:id', () => {
+      it('should return a brew method', (done) => {
+        request.get(`${baseUrl}/method/${this.tempBrewMethod._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then(res => {
+          expect(res.status).to.equal(200);
+          done();
+        })
+        .catch(done);
+      });
+
+      it('should return a 401', (done) => {
+        request.get(`${baseUrl}/method/${this.tempBrewMethod._id}`)
+        .then(done)
+        .catch(err => {
+          const res = err.response;
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+
+      it('should return a 404 NOT FOUND', (done) => {
+        request.get(`${baseUrl}/method/badroute`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then(done)
+        .catch(err => {
+          const res = err.response;
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+
+      it('should return a 400 BAD REQUEST', (done) => {
+        request.get(`${baseUrl}/method`)
+        .then(done)
+        .catch(err => {
+          const res = err.response;
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('testing PUT at api/method/:id', () => {
+      it('should return a new brew-method', (done) => {
+        request.put(`${baseUrl}/method/${this.tempBrewMethod._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .send({
+          title: 'Kalita Wave',
+          recipe: 'The right way',
+          brewTimer: 2
+        })
+        .then(res => {
+          expect(res.status).to.equal(200);
+          done();
+        }).catch(done);
+      });
+
+      it('should return a 401', (done) => {
+        request.put(`${baseUrl}/method/${this.tempBrewMethod._id}`)
+        .send({
+          title: 'Kalita Wave',
+          recipe: 'The right way',
+          brewTimer: 2
+        })
+        .then(done)
+        .catch(err => {
+          const res =err.response;
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+
+      it('should return a 400', (done) => {
+        request.put(`${baseUrl}/method/${this.tempBrewMethod._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .catch(err => {
+          const res = err.response;
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+      it('should return a 404', (done) => {
+        request.put(`${baseUrl}/method/badroute`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .send({
+          title: 'Kalita Wave',
+          recipe: 'The right way',
+          brewTimer: 2
+        })
+        .then(done)
+        .catch(err => {
+          const res = err.response;
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
     });
   });
 });
