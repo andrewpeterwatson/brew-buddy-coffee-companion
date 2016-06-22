@@ -235,5 +235,19 @@ describe('testing brew-method-routes', function() {
         });
       });
     });
+
+    describe('testing DELETE /api/method/:id', () => {
+      it('should return a 204', (done) => {
+        request.del(`${baseUrl}/method/${this.tempBrewMethod._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then(res => {
+          expect(res.status).to.equal(204);
+          done();
+        })
+        .catch(done);
+      });
+    });
   });
 });
