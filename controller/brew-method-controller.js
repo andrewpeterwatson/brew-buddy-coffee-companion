@@ -5,6 +5,7 @@ const BrewMethod = require('../model/brew-method');
 const httpErrors = require('http-errors');
 
 exports.createBrewMethod= function(brewMethodData) {
+  console.log('brewMethod controller hit');
   debug('createBrewMethod');
   return new Promise((resolve, reject) => {
     new BrewMethod(brewMethodData).save()
