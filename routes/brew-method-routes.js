@@ -12,7 +12,6 @@ const brewMethodRouter = module.exports = new Router();
 
 brewMethodRouter.post('/method', parseBearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/brewmethod');
-  console.log('POST hit');
   req.body.userId = req.userId;
   brewMethodController.createBrewMethod(req.body)
   .then(brewMethod => res.json(brewMethod))

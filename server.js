@@ -21,7 +21,6 @@ mongoose.connect(mongoURI);
 app.use(morgan('dev'));
 
 app.all('/', parserBearerAuth, function(req, res){
-  console.log('req.userId', req.userId);
   res.send('a Cup of Coffee!');
 });
 

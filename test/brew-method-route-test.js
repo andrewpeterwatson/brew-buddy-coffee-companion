@@ -75,7 +75,6 @@ describe('testing brew-method-routes', function() {
     });
 
     describe('testing POST on /api/method', () => {
-      // console.log('POST method test   ');
       it('should return a brew-method', (done) => {
         request.post(`${baseUrl}/method`)
         .send({

@@ -5,7 +5,6 @@ const BrewMethod = require('../model/brew-method');
 const httpErrors = require('http-errors');
 
 exports.createBrewMethod= function(brewMethodData) {
-  console.log('brewMethod controller hit');
   debug('createBrewMethod');
   return new Promise((resolve, reject) => {
     new BrewMethod(brewMethodData).save()
@@ -26,8 +25,8 @@ exports.fetchBrewMethod = function(brewMethodId) {
 
 exports.updateBrewMethod = function(brewMethodId, reqBody) {
   return new Promise((resolve, reject) => {
-    if(Object.keys(reqBody).length === 0) return reject(httpErrors(400, 'body con not be found'));
-    const brewMethodKeys = ['title', 'recipe', 'brewTime', 'brewMethodId'];
+    if(Object.keys(reqBody).length === 0) return reject(httpErrors(400, 'body can not be found'));
+    const brewMethodKeys = ['title', 'recipe', 'brewTime'];
     Object.keys(reqBody).forEach((key) => {
       if(brewMethodKeys.indexOf(key) === -1) return reject(httpErrors(400, 'no key provided'));
     });
