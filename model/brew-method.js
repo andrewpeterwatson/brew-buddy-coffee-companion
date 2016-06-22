@@ -6,8 +6,7 @@ const mongoose = require('mongoose');
 const brewMethodSchema = mongoose.Schema({
   title: {type: String, required: true}
   , recipe: {type: String, required: true}
-  , brewTime: {type: Number, required: true}
-  , brewMethodId: {type: mongoose.Schema.ObjectId, required: true}
+  , brewTimer: {type: Number, required: true}
 
 });
 
