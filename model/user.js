@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.methods.generateHash = function(password){
-  debug('generateHash');
+  debug('generateHash', password);
   return new Promise((resolve, reject) => {
     if (!password) return reject(httpErrors(400, 'must provide password'));
     bcrypt.hash(password, 8, (err, hash) => {

@@ -5,7 +5,7 @@ const httpErrors = require('http-errors');
 const User = require('../model/user');
 
 exports.signup = function(reqBody) {
-  debug('signup');
+  debug('signup', reqBody);
   return new Promise((resolve, reject) => {
     var password = reqBody.password;
     delete reqBody.password;

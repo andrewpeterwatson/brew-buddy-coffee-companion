@@ -9,7 +9,7 @@ const jsonParser = require('body-parser').json();
 const authRouter = module.exports = new Router();
 
 authRouter.post('/signup', jsonParser, (req, res, next) => {
-  debug('posting signup');
+  debug('posting signup', req.body);
   authController.signup(req.body)
   .then(token => res.send(token))
   .catch(next);
