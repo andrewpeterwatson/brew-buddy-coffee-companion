@@ -23,9 +23,13 @@ brewMethodRouter.get('/method', (req, res, next) => {
 });
 
 brewMethodRouter.get('/method/:id', parseBearerAuth, (req, res, next) => {
+  debug('brew-method-routes GET');
   brewMethodController.fetchBrewMethod(req.params.id)
   .then(brewMethod => {
-    if(!brewMethod) return next(httpErrors(404, 'not found'));
+    if(!brewMethod) {
+      return next(httpErrors(404, 'not found'));
+    }
+    res.json(brewMethod);
   })
   .catch(next);
 });

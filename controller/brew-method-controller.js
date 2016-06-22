@@ -26,7 +26,7 @@ exports.fetchBrewMethod = function(brewMethodId) {
 exports.updateBrewMethod = function(brewMethodId, reqBody) {
   return new Promise((resolve, reject) => {
     if(Object.keys(reqBody).length === 0) return reject(httpErrors(400, 'body can not be found'));
-    const brewMethodKeys = ['title', 'recipe', 'brewTime'];
+    const brewMethodKeys = ['title', 'recipe', 'brewTimer'];
     Object.keys(reqBody).forEach((key) => {
       if(brewMethodKeys.indexOf(key) === -1) return reject(httpErrors(400, 'no key provided'));
     });
