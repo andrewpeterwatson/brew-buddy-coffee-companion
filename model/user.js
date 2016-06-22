@@ -2,7 +2,7 @@
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const debug = require('debug')('brewbuddie:user');
+const debug = require('debug')('brewBuddy:user');
 const httpErrors = require('http-errors');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');

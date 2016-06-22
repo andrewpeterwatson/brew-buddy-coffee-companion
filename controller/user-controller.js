@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('debug')('brewbuddie:user-controller');
+const debug = require('debug')('brewBuddy:user-controller');
 const User = require('../model/user');
 
 exports.removeAllUsers = function () {
