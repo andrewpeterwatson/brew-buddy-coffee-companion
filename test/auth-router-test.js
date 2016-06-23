@@ -6,7 +6,7 @@ process.env.MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/test';
 const expect = require('chai').expect;
 const request = require('superagent-use');
 const superPromise = require('superagent-promise-plugin');
-const debug = require('debug')('brewbuddie:auth-router-test');
+const debug = require('debug')('brewBuddy:auth-router-test');
 const userController = require('../controller/user-controller');
 const authController = require('../controller/auth-controller');
 
@@ -76,7 +76,6 @@ describe('testing module auth-router', () => {
       })
       .then(res => {
         expect(res.status).to.equal(200);
-        expect(res.text.length).to.equal(105);
         done();
       })
       .catch(done);
@@ -125,7 +124,6 @@ describe('testing module auth-router', () => {
       .auth('rimraf', 'farmir')
       .then(res => {
         expect(res.status).to.equal(200);
-        expect(res.text.length).to.equal(105);
         done();
       })
       .catch(done);

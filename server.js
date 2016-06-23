@@ -9,8 +9,11 @@ const debug = require('debug')('brewbuddie:server');
 const handleError = require('./lib/app-error');
 const parserBearerAuth = require('./lib/parse-bearer-auth');
 const authRouter = require('./routes/auth-route');
+
 const flavorRouter = require('./routes/flavor-route');
 
+const originRouter = require('./routes/origin-router');
+const brewMethodRouter = require('./routes/brew-method-routes');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,12 +24,13 @@ mongoose.connect(mongoURI);
 app.use(morgan('dev'));
 
 app.all('/', parserBearerAuth, function(req, res){
-  console.log('req.userId', req.userId);
   res.send('a Cup of Coffee!');
 });
 
 app.use('/api', authRouter);
 app.use('/api', flavorRouter);
+app.use('/api', originRouter);
+app.use('/api', brewMethodRouter);
 
 app.all('*', function(req, res, next){
   debug('404 * route');
