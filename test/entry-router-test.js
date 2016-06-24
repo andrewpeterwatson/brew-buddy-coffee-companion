@@ -83,6 +83,20 @@ describe('testing entry-routes', function() {
           this.tempOrigin = res.body._id;
         })
         .then( () => {
+          return request.post(`${baseUrl}/flavor`)
+          .send({
+            flavorType: 'chocaltey'
+            , title: 'the dope flavor'
+            , adjective: ['fast', 'slow']
+          })
+          .set({
+            Authorization: `Bearer ${this.tempToken}`
+          });
+        })
+        .then(res => {
+          this.tempFlavor = res.body._id;
+        })
+        .then( () => {
           return request.post(`${baseUrl}/entry`)
           .send({
             date: new Date()
@@ -95,7 +109,7 @@ describe('testing entry-routes', function() {
             , username: 'Kyle'
             , methodId: this.tempBrewMethod
             , originId: this.tempOrigin
-            //, flavorId: this.tempFlavor
+            , flavorId: this.tempFlavor
           })
           .set({
             Authorization: `Bearer ${this.tempToken}`
@@ -136,7 +150,7 @@ describe('testing entry-routes', function() {
         , username: 'Kyle'
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
-        //, flavorId: this.tempFlavor
+        , flavorId: this.tempFlavor
       })
       .set({Authorization: `Bearer ${this.tempToken}`})
       .then(res => {
@@ -162,7 +176,7 @@ describe('testing entry-routes', function() {
         , username: 'Kyle'
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
-        //, flavorId: this.tempFlavor
+        , flavorId: this.tempFlavor
       })
       .set({Authorization: `Bearer ${this.tempToken}`})
       .then(done)
@@ -195,7 +209,7 @@ describe('testing entry-routes', function() {
         , username: 'Kyle'
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
-        //, flavorId: this.tempFlavor
+        , flavorId: this.tempFlavor
       })
       .then(done)
       .catch((err) => {
@@ -259,7 +273,7 @@ describe('testing entry-routes', function() {
             , username: 'Kyle'
             , methodId: this.tempBrewMethod
             , originId: this.tempOrigin
-            //, flavorId: this.tempFlavor
+            , flavorId: this.tempFlavor
           }),
           entryController.createEntry({
             date: new Date()
@@ -272,7 +286,7 @@ describe('testing entry-routes', function() {
             , username: 'Kyle'
             , methodId: this.tempBrewMethod
             , originId: this.tempOrigin
-            //, flavorId: this.tempFlavor
+            , flavorId: this.tempFlavor
           })
         ])
         .then(() => done())
@@ -309,7 +323,7 @@ describe('testing entry-routes', function() {
         , username: 'Kyle'
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
-        //, flavorId: this.tempFlavor.id
+        , flavorId: this.tempFlavor
         })
       .then((entry) => {
         testEntry = entry;
@@ -330,7 +344,7 @@ describe('testing entry-routes', function() {
         , username: 'Kyle'
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
-        //, flavorId: this.tempFlavor.id
+        , flavorId: this.tempFlavor
       })
       .set({
         Authorization: `Bearer ${this.tempToken}`
@@ -355,7 +369,7 @@ describe('testing entry-routes', function() {
         , username: 'Kyle'
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
-        //, flavorId: this.tempFlavor.id
+        , flavorId: this.tempFlavor
       })
       .catch((err) => {
         expect(err.response.status).to.equal(401);
@@ -387,7 +401,7 @@ describe('testing entry-routes', function() {
         , username: 'Kyle'
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
-        //, flavorId: this.tempFlavor.id
+        , flavorId: this.tempFlavor
       })
       .set({
         Authorization: `Bearer ${this.tempToken}`
@@ -414,7 +428,7 @@ describe('testing entry-routes', function() {
         , username: 'Kyle'
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
-        //, flavorId: this.tempFlavor.id
+        , flavorId: this.tempFlavor
         })
       .then((entry) => {
         testEntry = entry;

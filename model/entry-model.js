@@ -13,7 +13,7 @@ const entrySchema = mongoose.Schema({
   , username: {type: String, required: true}
   , methodId: {type: mongoose.Schema.ObjectId, required: true}
   , originId: {type: mongoose.Schema.ObjectId, required: true}
-  //, flavorId: {type: [mongoose.Schema.ObjectId], max: 3, required: true}
+  , flavorId: {type: [mongoose.Schema.ObjectId], max: 3, required: true}
 });
 
 module.exports =  mongoose.model('entry', entrySchema);

@@ -76,7 +76,6 @@ describe('testing module auth-router', () => {
       })
       .then(res => {
         expect(res.status).to.equal(200);
-        expect(res.text.length).to.equal(105);
         done();
       })
       .catch(done);
@@ -125,7 +124,6 @@ describe('testing module auth-router', () => {
       .auth('rimraf', 'farmir')
       .then(res => {
         expect(res.status).to.equal(200);
-        expect(res.text.length).to.equal(105);
         done();
       })
       .catch(done);
