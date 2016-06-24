@@ -127,7 +127,6 @@ describe('testing module flavor-router', () => {
     it('should return a flavor', (done) => {
       request.get(`${baseURL}/flavor/${this.tempFlavor._id}`)
       .set({Authorization: `Bearer ${this.tempToken}`})
-      .auth('davide','1234')
       .then(res => {
         expect(res.status).to.equal(200);
         expect(res.body.title).to.equal('lemon');
