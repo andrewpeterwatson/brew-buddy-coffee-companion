@@ -310,7 +310,6 @@ describe('testing entry-routes', function() {
 
 //PUT testing
     describe('PUT /api/entry/:id', () => {
-      let testEntry = {};
       before((done) => {
         entryController.createEntry({
           date: new Date()
@@ -326,7 +325,7 @@ describe('testing entry-routes', function() {
         , flavorId: this.tempFlavor
         })
       .then((entry) => {
-        testEntry = entry;
+        this.testEntry = entry;
         done();
       });
       });
@@ -415,7 +414,6 @@ describe('testing entry-routes', function() {
 
   //DELETE routes
     describe('DELETE /api/entry/:id', () => {
-      let testEntry = {};
       before((done) => {
         entryController.createEntry({
           date: new Date()
@@ -431,7 +429,7 @@ describe('testing entry-routes', function() {
         , flavorId: this.tempFlavor
         })
       .then((entry) => {
-        testEntry = entry;
+        this.testEntry = entry;
         done();
       });
       });
