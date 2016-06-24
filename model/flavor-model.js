@@ -3,9 +3,8 @@
 const mongoose = require('mongoose');
 
 const flavorSchema = mongoose.Schema({
-  title: { type: String, required: true}
-  , flavor: {type: String, required: true}
-  , name: { type: String, required: true}
+  flavorType: {type: String, required: true}
+  , title: { type: String, required: true}
   , adjective: {type: [String], required: true}
 });
 
