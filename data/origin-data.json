@@ -1,0 +1,26 @@
+[
+    {
+    "country": "Guatemala",
+    "reqMethod":"French Press"
+  },
+  {
+    "country": "Brazil",
+    "reqMethod":"French Press"
+  },
+  {
+    "country": "Ethiopia",
+    "reqMethod":"Chemex"
+  },
+  {
+    "country": "Kenya",
+    "reqMethod":"Chemex"
+  },
+  {
+    "country": "Columbia",
+    "reqMethod":"French Press"
+  },
+  {
+    "country": "Indonesia",
+    "reqMethod":"Siphon Pot"
+},
+]

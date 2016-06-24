@@ -58,6 +58,7 @@ describe('testing module origin-router', () => {
         .send({
           title: 'RimRafBrew',
           recipe: 'First Rim. Then Raf. Repeat',
+          brewRatio: 3,
           brewTimer: 3
         })
         .set({

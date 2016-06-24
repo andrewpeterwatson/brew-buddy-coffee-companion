@@ -53,6 +53,7 @@ describe('testing brew-method-routes', function() {
         .send({
           title: 'Kalita Wave'
           , recipe: 'The right way'
+          , brewRatio: 3
           , brewTimer: 2
         })
         .set({
@@ -80,6 +81,7 @@ describe('testing brew-method-routes', function() {
         .send({
           title: 'Kalita Wave'
           , recipe: 'The right way'
+          , brewRatio: 3
           , brewTimer: 2
         })
         .set({
@@ -96,6 +98,7 @@ describe('testing brew-method-routes', function() {
         .send({
           title: 'Kalita Wave'
           , recipe: 'The right way'
+          , brewRatio: 3
           , brewTimer: 2
         })
         .then(done)
@@ -112,6 +115,7 @@ describe('testing brew-method-routes', function() {
         .send({
           title: 'bad',
           recipe: 'request',
+          brewRatio: 3,
           brewTimer: null
         })
         .set({
@@ -182,6 +186,7 @@ describe('testing brew-method-routes', function() {
         .send({
           title: 'Kalita Wave',
           recipe: 'The right way',
+          brewRatio: 3,
           brewTimer: 2
         })
         .then(res => {
@@ -195,6 +200,7 @@ describe('testing brew-method-routes', function() {
         .send({
           title: 'Kalita Wave',
           recipe: 'The right way',
+          brewRatio: 3,
           brewTimer: 2
         })
         .then(done)
@@ -225,6 +231,7 @@ describe('testing brew-method-routes', function() {
         .send({
           title: 'Kalita Wave',
           recipe: 'The right way',
+          brewRatio: 3,
           brewTimer: 2
         })
         .then(done)
