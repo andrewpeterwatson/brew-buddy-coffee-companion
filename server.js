@@ -1,45 +1,48 @@
-'use strict';
+ 'use strict';
 
-const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
-const httpErrors = require('http-errors');
-const debug = require('debug')('brewbuddie:server');
+ const express = require('express');
+ const morgan = require('morgan');
+ const mongoose = require('mongoose');
+ const httpErrors = require('http-errors');
+ const debug = require('debug')('brewbuddie:server');
 
-const handleError = require('./lib/app-error');
-const parserBearerAuth = require('./lib/parse-bearer-auth');
-const authRouter = require('./routes/auth-route');
+ const handleError = require('./lib/app-error');
+ const parserBearerAuth = require('./lib/parse-bearer-auth');
+ const authRouter = require('./routes/auth-route');
 
-const originRouter = require('./routes/origin-router');
-const brewMethodRouter = require('./routes/brew-method-routes');
+ const flavorRouter = require('./routes/flavor-route');
 
-const app = express();
-const port = process.env.PORT || 3000;
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/authdev';
+ const originRouter = require('./routes/origin-router');
+ const brewMethodRouter = require('./routes/brew-method-routes');
 
-mongoose.connect(mongoURI);
+ const app = express();
+ const port = process.env.PORT || 3000;
+ const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/authdev';
 
-app.use(morgan('dev'));
+ mongoose.connect(mongoURI);
 
-app.all('/', parserBearerAuth, function(req, res){
-  res.send('a Cup of Coffee!');
-});
+ app.use(morgan('dev'));
 
-app.use('/api', authRouter);
-app.use('/api', originRouter);
-app.use('/api', brewMethodRouter);
+ app.all('/', parserBearerAuth, function(req, res){
+   res.send('a Cup of Coffee!');
+ });
 
-app.all('*', function(req, res, next){
-  debug('404 * route');
-  next(httpErrors(404, 'Not Found'));
-});
+ app.use('/api', authRouter);
+ app.use('/api', flavorRouter);
+ app.use('/api', originRouter);
+ app.use('/api', brewMethodRouter);
 
-app.use(handleError);
+ app.all('*', function(req, res, next){
+   debug('404 * route');
+   next(httpErrors(404, 'Not Found'));
+ });
+
+ app.use(handleError);
 
 // start server
-const server = app.listen(port, function(){
-  debug('server up <o)))><|', port);
-});
+ const server = app.listen(port, function(){
+   debug('server up <o)))><|', port);
+ });
 
-server.isRunning = true;
-module.exports = server;
+ server.isRunning = true;
+ module.exports = server;
