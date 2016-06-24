@@ -69,7 +69,7 @@ describe('testing brew-method-routes', function() {
     afterEach((done) => {
       Promise.all([
         userController.removeAllUsers()
-        ,brewMethodController.removeAllBrewMethods()
+        , brewMethodController.removeAllBrewMethods()
       ])
       .then(() => done())
       .catch(done);
