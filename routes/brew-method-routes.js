@@ -21,6 +21,13 @@ brewMethodRouter.post('/method', parseBearerAuth, jsonParser, function(req, res,
 brewMethodRouter.get('/method', (req, res, next) => {
   next(httpErrors(400, 'no ID provided'));
 });
+brewMethodRouter.get('/method/all', parseBearerAuth, jsonParser, (req, res, next) => {
+  brewMethodController.fetchAllBrewMethods()
+  .then((brewMethod) => {
+    res.json(brewMethod);
+  })
+  .catch(next);
+});
 
 brewMethodRouter.get('/method/:id', parseBearerAuth, (req, res, next) => {
   debug('brew-method-routes GET');
@@ -34,13 +41,6 @@ brewMethodRouter.get('/method/:id', parseBearerAuth, (req, res, next) => {
   .catch(next);
 });
 
-brewMethodRouter.get('/method/all', parseBearerAuth, jsonParser, (req, res, next) => {
-  brewMethodController.fetchAllBrewMethods()
-  .then((brewMethod) => {
-    res.json(brewMethod);
-  })
-  .catch(next);
-});
 
 brewMethodRouter.put('/method/:id', parseBearerAuth, jsonParser, (req,res,next) => {
   brewMethodController.updateBrewMethod(req.params.id, req.body)
