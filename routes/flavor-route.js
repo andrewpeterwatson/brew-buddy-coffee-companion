@@ -4,7 +4,7 @@ const Router = require('express').Router;
 const debug = require('debug')('brewbuddie:flavor-route');
 const jsonParser = require('body-parser').json();
 const flavorController = require('../controller/flavor-controller');
-const parserBearerAuth = require('../controller/lib/parse-bearer-auth');
+const parserBearerAuth = require('../lib/parse-bearer-auth');
 
 
 const flavorRouter = module.exports = new Router;
