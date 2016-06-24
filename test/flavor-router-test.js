@@ -5,7 +5,6 @@ process.env.MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/test';
 
 const expect = require('chai').expect;
 const request = require('superagent-use');
-const Promise = require('bluebird');
 const superPromise = require('superagent-promise-plugin');
 const debug = require('debug')('brewbuddie:flavor-router-test');
 
