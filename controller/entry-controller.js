@@ -7,7 +7,7 @@ const httpErrors = require('http-errors');
 exports.createEntry = function(entryData){
   debug('createEntry');
   return new Promise((resolve, reject) => {
-    entryData.createdAt = new Date();
+    console.log(entryData);
     new Entry(entryData).save()
     .then( entry => resolve(entry))
     .catch( err => reject(httpErrors(400, err.message)));
@@ -19,34 +19,41 @@ exports.fetchEntry = function(entryId){
   return new Promise((resolve, reject) => {
     Entry.findOne({_id: entryId})
     .then(user => resolve(user))
-    .catch(err => reject(httpErrors(400,err.message)));
+    .catch(err => reject(httpErrors(404,err.message)));
+  });
+};
+
+exports.fetchAllEntries = function() {
+  debug('fetching all enties');
+  return new Promise((resolve, reject) => {
+    Entry.find({})
+    .then(resolve)
+    .catch(reject);
   });
 };
 
 exports.updateEntry = function(entryId, entryData){
+  debug('updating entry', entryId);
   return new Promise((resolve, reject) => {
-    if(!entryId){
-      var err = httpErrors(400,'bad request');
-      return reject(err);
-    }
-    if(!entryData){
-      err = httpErrors(400,'bad request');
-      return reject(err);
-    }
+    if (Object.keys(entryData).length === 0) return reject(httpErrors(400, 'need to provide a body'));
 
-    Entry.findOneAndUpdate(entryId, entryData)
-    .then(() => Entry.findByIdAndUpdate({_id: entryId}))
-    .then( entry => resolve(entry))
-    .catch( err => reject(httpErrors(400, err.message)));
+    const entryKeys = ['date', 'aromas', 'acidity', 'body', 'finish', 'experience' ,'rating', 'username', 'methodId', 'originId'];
+    Object.keys(entryData).forEach((key) => {
+      if (entryKeys.indexOf(key) === -1) return reject(httpErrors(400, 'key does not exist'));
+    });
+
+    Entry.findByIdAndUpdate(entryId, entryData)
+    .then(() => Entry.findOne({_id: entryId}).then(resolve))
+    .catch(err => reject(httpErrors(404, err.message)));
   });
 };
 
 exports.removeOneEntry = function(entryId){
   debug('delete one entry');
-  return new Promise ((resolve, reject) => {
-    Entry.findByIdAndRemove({_id: entryId})
-    .then( entry => resolve(204, entry))
-    .catch( err => reject(httpErrors(400, err.message)));
+  return new Promise((resolve, reject) => {
+    Entry.remove({_id: entryId})
+    .then(resolve)
+    .catch(() => reject(httpErrors(404, 'origin not found')));
   });
 };
 
