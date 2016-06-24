@@ -10,10 +10,10 @@
  const parserBearerAuth = require('./lib/parse-bearer-auth');
  const authRouter = require('./routes/auth-route');
 
- const flavorRouter = require('./routes/flavor-route');
-
  const originRouter = require('./routes/origin-router');
  const brewMethodRouter = require('./routes/brew-method-routes');
+ const entryRouter = require('./routes/entry-route');
+ const flavorRouter = require('./routes/flavor-route');
 
  const app = express();
  const port = process.env.PORT || 3000;
@@ -23,9 +23,15 @@
 
  app.use(morgan('dev'));
 
+ app.use('/api', authRouter);
+ app.use('/api', originRouter);
+ app.use('/api', brewMethodRouter);
+ app.use('/api', entryRouter);
+
  app.all('/', parserBearerAuth, function(req, res){
    res.send('a Cup of Coffee!');
  });
+
 
  app.use('/api', authRouter);
  app.use('/api', flavorRouter);
