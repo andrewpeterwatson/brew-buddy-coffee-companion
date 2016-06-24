@@ -14,13 +14,12 @@ flavorRouter.post('/flavor', jsonParser, function(req, res, next){
   flavorController.createFlavor(req.body)
   .then((flavor) => {
     debug('hitting post route');
-    console.log('flavorflavorflavor', flavor);
     res.json(flavor);
   })
   .catch(next);
 });
 
-//add in parserBearerAuth to implement talk to Anderw//
+
 flavorRouter.get('/flavor/:id', function(req, res, next){
   debug('get /flavor/:id');
   flavorController.fetchFlavor(req.params.id)
@@ -38,6 +37,6 @@ flavorRouter.put('/flavor/:id', jsonParser, function(req, res, next){
 flavorRouter.delete('/flavor/:id', function(req, res, next) {
   debug('delete /flavor/:id');
   flavorController.deleteFlavor(req.params.id)
-  .then(flavor => res.json(flavor))
+  .then(() => res.status(204).end())
   .catch(next);
 });

@@ -8,7 +8,7 @@ const request = require('superagent-use');
 const Promise = require('bluebird');
 const superPromise = require('superagent-promise-plugin');
 const debug = require('debug')('brewbuddie:flavor-router-test');
-// const flavorRouter = require('../routes/flavor-route');
+
 
 const flavorController = require('../controller/flavor-controller');
 const authController = require('../controller/auth-controller');
@@ -27,7 +27,6 @@ describe('testing module flavor-router', () => {
     debug('before module-auth');
     if(!server.isRunning) {
       server.listen(port, () => {
-        // server.isRunning = true;
         debug(`server is up ::: ${port}`);
         done();
       });
@@ -40,7 +39,6 @@ describe('testing module flavor-router', () => {
     debug('after module flavor-router');
     if (server.isRunning) {
       server.close(() => {
-        // server.isRunning = false;
         debug('server is down');
         done();
       });
@@ -107,11 +105,9 @@ describe('testing module flavor-router', () => {
         done();
       });
     });
-
   });
-//////////////////////////////////////////////////////////////////////
-  describe('testing GET', function() {
 
+  describe('testing GET api/flavor', function() {
     after((done) => {
       debug('remove users');
       Promise.all ([
@@ -132,9 +128,7 @@ describe('testing module flavor-router', () => {
      .catch(done);
     });
 
-    // describe('testing GET /api/flavor/:id', () => {
     it('should return a flavor', (done) => {
-      // console.log('ID used in request', this.tempToken._id);
       request.get(`${baseURL}/flavor/${this.tempFlavor._id}`)
       .set({Authorization: `Bearer ${this.tempToken}`})
       .auth('davide','1234')
@@ -146,6 +140,92 @@ describe('testing module flavor-router', () => {
       })
        .catch(done);
     });
-    // });
+    it('should return not found', (done) => {
+      request.get(`${baseURL}/flavor/fail/${this.tempFlavor._id}`)
+      .set({Authorization: `Bearer ${this.tempToken}`})
+      .auth('davide', '1234')
+      .then(done)
+      .catch(err => {
+        const res = err.response;
+        expect(res.status).to.equal(404);
+        console.log('++++++++++',  res.text);
+        done();
+      });
+    });
+  });
+
+
+  describe('testing PUT api/flavor', function() {
+    after((done) => {
+      debug('remove users');
+      Promise.all ([
+        userController.removeAllUsers()
+         , flavorController.removeAllFlavor()
+      ])
+       .then(() => done())
+       .catch(done);
+    });
+
+    before((done) => {
+      debug('hitting module flavor test');
+      authController.signup({username: 'dylan', password: 'davide'})
+     .then(token =>  this.tempToken = token)
+     .then(() => flavorController.createFlavor({flavorType: 'cinnamon', title: 'lemon', adjective: ['sweet']}))
+     .then((flavor) => this.tempFlavor = flavor)
+     .then( () => done() )
+     .catch(done);
+    });
+
+    it('should return return a flavor', (done) => {
+      request.put(`${baseURL}/flavor/${this.tempFlavor._id}`)
+      .set({Authorization: `Bearer ${this.tempToken}`})
+      .send({flavorType: 'cinnamon', title: 'lemon', adjective: ['sweet']})
+      .then(res => {
+        expect(res.status).to.equal(200);
+        done();
+      }).catch(done);
+
+    });
+
+    it('should return a 400 if no flavor is sent', (done) => {
+      request.put(`${baseURL}/flavor/${this.tempFlavor._id}`)
+      .set({Authorization: `Bearer ${this.tempToken}`})
+      // .send({})
+      .catch((err) => {
+        expect(err.response.status).to.equal(400);
+        done();
+      });
+    });
+  });
+
+  describe('testing DELETE api/flavor', () => {
+    after((done) => {
+      debug('remove users');
+      Promise.all ([
+        userController.removeAllUsers()
+         , flavorController.removeAllFlavor()
+      ])
+       .then(() => done())
+       .catch(done);
+    });
+
+    before((done) => {
+      debug('hitting module flavor test');
+      authController.signup({username: 'dylan', password: 'davide'})
+     .then(token =>  this.tempToken = token)
+     .then(() => flavorController.createFlavor({flavorType: 'cinnamon', title: 'lemon', adjective: ['sweet']}))
+     .then((flavor) => this.tempFlavor = flavor)
+     .then( () => done() )
+     .catch(done);
+    });
+
+    it('should return a 204', (done) => {
+      request.del(`${baseURL}/flavor/${this.tempFlavor._id}`)
+      .set({Authorization: `Bearer ${this.tempToken}`})
+      .then(res => {
+        expect(res.status).to.equal(204);
+        done();
+      }).catch(done);
+    });
   });
 });

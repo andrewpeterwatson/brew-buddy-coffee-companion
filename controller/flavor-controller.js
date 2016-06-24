@@ -12,7 +12,6 @@ exports.createFlavor = function(reqBody) {
     new Flavor(reqBody)
     .save()
     .then((flavor) => {
-      console.log('crud flavor flavor ', flavor);
       resolve(flavor);
     })
     .catch(err => reject(httpErrors(400, err.message)));
@@ -32,16 +31,17 @@ exports.removeAllFlavor = function() {
   return Flavor.remove({});
 };
 
-exports.updateFlavor = function(flavorId) {
-  debug('updateFlavor');
+exports.updateFlavor = function(flavorId, reqBody) {
+  debug('updateFlavor', reqBody);
   return new Promise((resolve, reject) => {
-    Flavor.findByIdAndUpdate({_id: flavorId})
+    if(!reqBody) return reject(httpErrors(400, 'no body provided'));
+    if(Object.keys(reqBody).length === 0) return reject(httpErrors(400, 'no body provided'));
+    Flavor.findByIdAndUpdate(flavorId, reqBody)
     .then(() => Flavor.findOne({_id: flavorId}))
     .then(flavor => resolve(flavor))
     .catch(reject);
   });
 };
-
 
 exports.deleteFlavor = function(flavorId) {
   debug('deleteFlavor');
