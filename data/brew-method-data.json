@@ -1,0 +1,60 @@
+[
+  {
+    "title": "French Press",
+    "recipe": [
+        "1. Remove the plunger and closely inspect that no old coffee oils or grounds are present on any plunger pieces, the lid, or cylinder. Besure to rebuild before brewing.",
+        "2. Put a kettle of water on to boil. You will use this for brewing as wellas preheating your French press.","3. Weigh out your coffee (See charts above). Set the grinder to theappropriate setting (coarse).",
+        "4. Once the kettle boils, preheat the French press and decantingvessels (carafes or mugs, etc.) with some water.",
+        "5. Pour out the preheating water. Place the French press on the scaleand tare it to zero.",
+        "6. Grind your coffee and add it to the French press. Check to see that the coffee weight hasn't changed, then tare to zero again.",
+        "7. Start the timer (set for 5 minutes) as you begin to pour the freshlyboiled hot water.",
+        "8. Completely saturate the grounds as you pour. Pour slowly toensure you can monitor the scale display accurately and achievethe correct coffee to water ratio.",
+        "9. After a minute give the brew six back-and-forth stirs and place the filter lid on top without plunging.",
+        "10. After 5 minutes, press the plunger down slowly and carefully.Pressing too quickly or forcefully may lead to hot coffee spurting.",
+        "11. Once the plunger filter pushes the grounds to the bottom, immediately decant the brew into a thermal carafe for serving."
+        ],
+    "brewRatio": "16",
+    "brewTimer": "4"
+  },
+  {
+    "title": "Chemex",
+    "recipe": [
+        "1. Fill your kettle and set to boil.",
+        "2. Weigh out whole bean coffee (see chart).",
+        "3. Place a filter into the top compartment of the Chemex making sure the 3-layered side is facing the spout. This will allow air toescape during the brew process.",
+        "4. Rinse the filter with ample water, around 16oz, to prevent any papery taste from affecting the brew. This also preheats the Chemex.",
+        "5. Once thoroughly saturated, tip the Chemex over a sink to dispose of the rinse water. Don't be tempted to remove the filter to empty faster; it can be difficult to secure back into place once removed.",
+        "6. Place your Chemex, complete with rinsed filter, on the scale and tare to zero.",
+        "7. Grind your coffee and add it to the Chemex filter. Check to see that the coffee weight hasn't changed after grinding—then tare to zero again.",
+        "8. Start your timer and pour twice as much water as coffee over the grounds. The goal is even saturation, so pour slowly in a clockwise pattern. Don't worry if you see a few drips falling through. This bloom allows the coffee to de-gas, enabling the water toyield the full potential of the coffee. This is an essential step that shouldnever be rushed.",
+        "9. After about a minute, add water in stages (around 70–100g at a time)until you reach the desired final brew weight, making sure that the grounds are never exposed to air until the brew is finished. Concentrate the pour towards the center of the Chemex, working your way outwards to about a centimeter from the edge of the slurry. The water stream from the pouring kettle should be slow enough to fall straight down, not at an angle.",
+        "10. Once the drips stall to every couple of seconds, your brew is finished. If your grind was correct, and you poured at the right speed, this should have taken between 4-5 minutes. Remove the filter and discard. Enjoy!"
+        ],
+  "brewRatio": "16",
+  "brewTimer": "4"
+  },
+  {
+    "title": "Siphon Pot",
+    "recipe": [
+      "1. Soak your cloth filter in hot water for at least 1 minute. This will allow it to stretch and create a better fit. Place the metal filter disk face down on the wet cloth filter. Pull the cinch strings tight while slowly adjusting the disk placement so that it remains centered in the filter. Tie the string into a firm knot and trim off any excess strings left.",
+      "2. Place the filter into the top chamber of the siphon in a way that lets the chain fall down the tube. Pull the chain down until you are able to attach the set hook to hold it in place. The top chamber is now ready.",
+      "3. Set your kettle to boil while you weigh out and grind 25g of coffee.",
+      "4 Place the flute in the holder. Place the lower globe on the scales and tare to zero. When the kettle reaches a boil, add 400g of water to the lower globe.",
+      "5 Set the flute back in place and put your heat source underneath.",
+      "6. Just before the water in the lower chamber reaches a boil secure the top chamber by pushing it down into the bottom chamber to create a firm seal.",
+      "7. Soon the water will begin to move into the upper chamber. Once this is complete, use a long stirring stick to adjust the cloth filter by nudging it in order to stop any jet streams of bubbles that may be present. Target temperature for the water here is 202˚ F. ",
+      "8. Add the coffee and perform the 1st stir, which is a rapid back and forth motion with the stirrer well submerged. Do not be afraid to agitate the coffee. It is important that you have all the coffee saturated within 3 seconds",
+      "9. If you did this correctly, the coffee should convene back into a thick crust with multiple strata of colors. Avoid creating any whirl pooling with the 1st and 2nd stirs. If you get the brew moving in a whirlpool, it will keep going a good bit after you stir, causing excess agitation.",
+      "10. After the first stir, lower the temperature of the heat source. If you are experiencing excess jetting lower it further as needed, just be mindful of the possibility of the brew prematurely dropping.",
+      "11. 35 seconds into the brew, perform the 2nd stir by gently moving the paddle back and forth along the top of the crust until it is all broken.",
+      "12. After the second stir, lower the temperature as much as possible without causing the brew to drop prematurely.",
+      "13. At 90 seconds, it is time for the final, light stirs. The final stirs and the subsequent drawdown are vital to the end extraction. For the final stir, cut the heat and give two light stirs around the sides. If the brew has not begun dropping by the end of the second stir, blow on the bottom globe.",
+      "14. The drawdown should last for approximately 45 seconds, even slight differences in drawdown times can have major effects on flavor. Total brew time is about 2.25-2.5 min. When the brew bubbles, it’s finished. Remove the top chamber carefully by slowly rocking it in a circular fashion until the seal is broken and it can be lifted free. ",
+      "15. You may want to decant the brew from the bottom chamber into another serving vessel as the brew made by a siphon is very hot. Cooling will allow the flavors to emerge for a more enjoyable experience.",
+      "16. Be sure to clean the siphon soon after brewing. Pull the filter chain to unset the hook and allow it to fall out of the top chamber.",
+      "17. After brewing the cloth filter should be rinsed very throughly with hot water before reuse. We recommend using a filter no more than 8 times before replacing it to avoid contributing off flavors. The filter should remain wet at all times. If it is allowed to dry out it should be disposed of. When not in use store the filter in a glass of water until its next use."
+    ],
+  "brewRatio": "16",
+  "brewTimer": "2.5"
+  }
+]
