@@ -3,7 +3,7 @@
 const Flavor = require('../model/flavor-model');
 const debug = require('debug')('brewbuddie:flavor-controller');
 const httpErrors = require('http-errors');
-const Promise = require('bluebird');
+
 
 exports.createFlavor = function(reqBody) {
   debug('createFlavor');

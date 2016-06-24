@@ -62,9 +62,6 @@ describe('testing module flavor-router', () => {
     before((done) => {
       debug('hitting module flavor test');
       authController.signup({username: 'dylan', password: 'davide'})
-      // .then(token => {
-      //   this.flavorToken = token
-      // })
       .then(token =>  {
         this.tempToken = token;
         done();
@@ -134,7 +131,6 @@ describe('testing module flavor-router', () => {
       .auth('davide','1234')
       .then(res => {
         expect(res.status).to.equal(200);
-        console.log('~~~~~~~~~~~~',  res.text);
         expect(res.body.title).to.equal('lemon');
         done();
       })
@@ -148,7 +144,6 @@ describe('testing module flavor-router', () => {
       .catch(err => {
         const res = err.response;
         expect(res.status).to.equal(404);
-        console.log('++++++++++',  res.text);
         done();
       });
     });
@@ -190,7 +185,6 @@ describe('testing module flavor-router', () => {
     it('should return a 400 if no flavor is sent', (done) => {
       request.put(`${baseURL}/flavor/${this.tempFlavor._id}`)
       .set({Authorization: `Bearer ${this.tempToken}`})
-      // .send({})
       .catch((err) => {
         expect(err.response.status).to.equal(400);
         done();
