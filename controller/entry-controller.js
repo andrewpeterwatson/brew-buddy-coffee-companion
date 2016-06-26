@@ -60,3 +60,13 @@ exports.removeOneEntry = function(entryId){
 exports.removeAllEntries = function(){
   return Entry.remove({});
 };
+
+//we added this//
+exports.fetchEntrySearch = function(entryId){
+  debug('fetching entry by request');
+  return new Promise((resolve, reject) => {
+    Entry.find({_id: entryId}).limit(10)
+   .then( entry => resolve(entry))
+   .catch(() => reject(httpErrors(404, 'Search not Found')));
+  });
+};
