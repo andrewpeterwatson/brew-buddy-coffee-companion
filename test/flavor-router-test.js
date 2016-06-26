@@ -77,9 +77,9 @@ describe('testing module flavor-router', () => {
         .post(`${baseURL}/flavor`)
         .set({Authorization: `Bearer ${this.tempToken}`})
         .send({
-          flavorType: 'spicy'
-          ,title: 'cinnamon'
-          ,adjective: 'sweet'
+          category: 'sugars'
+          , flavorType: 'spicy'
+          , title: 'cinnamon'
         })
         .then(res => {
           debug('hitting it block');
@@ -118,7 +118,7 @@ describe('testing module flavor-router', () => {
       debug('hitting module flavor test');
       authController.signup({username: 'dylan', password: 'davide'})
      .then(token =>  this.tempToken = token)
-     .then(() => flavorController.createFlavor({flavorType: 'cinnamon', title: 'lemon', adjective: ['sweet']}))
+     .then(() => flavorController.createFlavor({category: 'sugars', flavorType: 'cinnamon', title: 'lemon'}))
      .then((flavor) => this.tempFlavor = flavor)
      .then( () => done() )
      .catch(done);
@@ -163,7 +163,7 @@ describe('testing module flavor-router', () => {
       debug('hitting module flavor test');
       authController.signup({username: 'dylan', password: 'davide'})
      .then(token =>  this.tempToken = token)
-     .then(() => flavorController.createFlavor({flavorType: 'cinnamon', title: 'lemon', adjective: ['sweet']}))
+     .then(() => flavorController.createFlavor({category: 'sugars', flavorType: 'cinnamon', title: 'lemon'}))
      .then((flavor) => this.tempFlavor = flavor)
      .then( () => done() )
      .catch(done);
@@ -172,7 +172,7 @@ describe('testing module flavor-router', () => {
     it('should return return a flavor', (done) => {
       request.put(`${baseURL}/flavor/${this.tempFlavor._id}`)
       .set({Authorization: `Bearer ${this.tempToken}`})
-      .send({flavorType: 'cinnamon', title: 'lemon', adjective: ['sweet']})
+      .send({category: 'Sugars', flavorType: 'cinnamon', title: 'lemon'})
       .then(res => {
         expect(res.status).to.equal(200);
         done();
@@ -205,7 +205,7 @@ describe('testing module flavor-router', () => {
       debug('hitting module flavor test');
       authController.signup({username: 'dylan', password: 'davide'})
      .then(token =>  this.tempToken = token)
-     .then(() => flavorController.createFlavor({flavorType: 'cinnamon', title: 'lemon', adjective: ['sweet']}))
+     .then(() => flavorController.createFlavor({category: 'Sugars', flavorType: 'cinnamon', title: 'lemon'}))
      .then((flavor) => this.tempFlavor = flavor)
      .then( () => done() )
      .catch(done);
