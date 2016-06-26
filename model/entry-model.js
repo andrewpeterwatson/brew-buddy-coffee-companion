@@ -14,6 +14,7 @@ const entrySchema = mongoose.Schema({
   , methodId: {type: mongoose.Schema.ObjectId, required: true}
   , originId: {type: mongoose.Schema.ObjectId, required: true}
   , flavorId: {type: [mongoose.Schema.ObjectId], max: 3, required: true}
+  , privacy: {type: Boolean, required: true}
 });
 
 module.exports =  mongoose.model('entry', entrySchema);

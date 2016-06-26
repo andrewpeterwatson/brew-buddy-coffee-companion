@@ -178,6 +178,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .set({Authorization: `Bearer ${this.tempToken}`})
       .then(done)
@@ -211,6 +212,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .then(done)
       .catch((err) => {
@@ -260,7 +262,7 @@ describe('testing entry-routes', function() {
       });
     });
 //Get all
-    describe('GET /api/entry/all', () => {
+    describe('GET /api/entry/all/username', () => {
       before((done) => {
         Promise.all([
           entryController.createEntry({
@@ -275,6 +277,7 @@ describe('testing entry-routes', function() {
             , methodId: this.tempBrewMethod
             , originId: this.tempOrigin
             , flavorId: this.tempFlavor
+            , privacy: false
           }),
           entryController.createEntry({
             date: new Date()
@@ -288,6 +291,7 @@ describe('testing entry-routes', function() {
             , methodId: this.tempBrewMethod
             , originId: this.tempOrigin
             , flavorId: this.tempFlavor
+            , privacy: false
           })
         ])
         .then(() => done())
@@ -295,7 +299,7 @@ describe('testing entry-routes', function() {
       });
 
       it('should return an array of entries', (done) => {
-        request.get(`${baseUrl}/entry/all`)
+        request.get(`${baseUrl}/entry/Kyle`)
         .set({
           Authorization: `Bearer ${this.tempToken}`
         })
@@ -324,6 +328,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
         })
       .then((entry) => {
         this.testEntry = entry;
@@ -345,6 +350,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .set({
         Authorization: `Bearer ${this.tempToken}`
@@ -370,6 +376,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .catch((err) => {
         expect(err.response.status).to.equal(401);
@@ -402,6 +409,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .set({
         Authorization: `Bearer ${this.tempToken}`
@@ -428,6 +436,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
         })
       .then((entry) => {
         this.testEntry = entry;
