@@ -86,7 +86,8 @@ describe('testing entry-routes', function() {
         .then( () => {
           return request.post(`${baseUrl}/flavor`)
           .send({
-            flavorType: 'chocaltey'
+            category: 'Sugars'
+            , flavorType: 'chocaltey'
             , title: 'the dope flavor'
             , adjective: ['fast', 'slow']
           })
