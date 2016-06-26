@@ -61,7 +61,6 @@ exports.removeAllEntries = function(){
   return Entry.remove({});
 };
 
-//we added this//
 exports.fetchEntrySearch = function(entryId){
   debug('fetching entry by request');
   return new Promise((resolve, reject) => {

@@ -54,10 +54,8 @@ entryRouter.delete('/entry/:id', parseBearerAuth, function(req, res, next){
   .catch(next);
 });
 
-//we added this//
-entryRouter.get('/entry/search?date,aroma,acidity,body,finish,experience,rating,username=:id', parseBearerAuth, (req, res, next) => {
+entryRouter.get('/entry/search/:id', parseBearerAuth, function(req, res, next) {
   debug('GET: api/entry/search/:id', req.params.id);
-  req.body.userId = req.userId;
   entryController.fetchEntrySearch(req.params.id)
  .then(entry => {
    if(!entry) return next(httpErrors(404, 'requested entry is not found'));
