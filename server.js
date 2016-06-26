@@ -23,10 +23,9 @@
 
  app.use(morgan('dev'));
 
- app.use('/api', authRouter);
- app.use('/api', originRouter);
- app.use('/api', brewMethodRouter);
- app.use('/api', entryRouter);
+
+
+
 
  app.all('/', parserBearerAuth, function(req, res){
    res.send('a Cup of Coffee!');
@@ -34,6 +33,7 @@
 
 
  app.use('/api', authRouter);
+ app.use('/api', entryRouter);
  app.use('/api', flavorRouter);
  app.use('/api', originRouter);
  app.use('/api', brewMethodRouter);
