@@ -18,6 +18,13 @@ flavorRouter.post('/flavor', jsonParser, parserBearerAuth, function(req, res, ne
   })
   .catch(next);
 });
+flavorRouter.get('/flavor/all', parserBearerAuth, jsonParser, (req, res, next) => {
+  flavorController.fetchAllFlavors()
+  .then((flavor) => {
+    res.json(flavor);
+  })
+  .catch(next);
+});
 
 
 flavorRouter.get('/flavor/:id',parserBearerAuth, function(req, res, next){
