@@ -27,11 +27,10 @@ originRouter.get('/origin/all', parseBearerAuth, (req, res, next) => {
   .catch(next);
 });
 
-//what is this?//
-// originRouter.get('/origin', (req, res, next) => {
-//   debug('GET /api/orign');
-//   next(httpErrors(400, 'no ide provided'));
-// });
+originRouter.get('/origin', (req, res, next) => {
+  debug('GET /api/orign');
+  next(httpErrors(400, 'no ide provided'));
+});
 
 originRouter.get('/origin/:id', parseBearerAuth, (req, res, next) => {
   debug('GET /api/origin/:id', req.params.id);
