@@ -103,6 +103,7 @@ describe('testing module flavor-router', () => {
     });
   });
 
+
   describe('testing GET api/flavor', function() {
     after((done) => {
       debug('remove users');
@@ -145,6 +146,34 @@ describe('testing module flavor-router', () => {
         done();
       });
     });
+
+    it('should return an array of flavors', (done) => {
+      before((done) => {
+        Promise.all([
+          flavorController.createFlavor({
+            category: 'sugars',
+            flavorType: 'cinnamon',
+            title: 'lemon'
+          }),
+          flavorController.createFlavor({
+            category: 'sugars',
+            flavorType: 'cinnamon',
+            title: 'lemon'
+          })
+        ])
+        .then(() => done())
+        .catch(done);
+      });
+      request.get(`${baseURL}/flavor/all`)
+      .set({Authorization: `Bearer ${this.tempToken}`})
+      .then((res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.an('array');
+        done();
+      })
+      .catch(done);
+    });
+
   });
 
 
@@ -189,6 +218,7 @@ describe('testing module flavor-router', () => {
       });
     });
   });
+
 
   describe('testing DELETE api/flavor', () => {
     after((done) => {
