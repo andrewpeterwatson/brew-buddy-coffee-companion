@@ -14,6 +14,7 @@
  const brewMethodRouter = require('./routes/brew-method-routes');
  const entryRouter = require('./routes/entry-route');
  const flavorRouter = require('./routes/flavor-route');
+ const brewBoardRouter = require('./routes/brew-board-route');
 
  const app = express();
  const port = process.env.PORT || 3000;
@@ -37,6 +38,7 @@
  app.use('/api', flavorRouter);
  app.use('/api', originRouter);
  app.use('/api', brewMethodRouter);
+ app.use('/api', brewBoardRouter);
 
  app.all('*', function(req, res, next){
    debug('404 * route');

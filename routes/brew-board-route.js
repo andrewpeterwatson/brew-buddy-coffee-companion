@@ -9,7 +9,7 @@ const brewBoardController = require('../controller/brew-board-controller');
 //module constants
 const brewBoardRouter = module.exports = new Router();
 
-brewBoardRouter.get('/entry/brewBoard', parseBearerAuth, (req, res, next) => {
+brewBoardRouter.get('/brewBoard', parseBearerAuth, (req, res, next) => {
   debug('GET /api/entry/brewBoard');
   brewBoardController.fetchAllBrewBoardEntries()
   .then((entries) => {

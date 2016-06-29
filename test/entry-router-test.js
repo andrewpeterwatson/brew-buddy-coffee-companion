@@ -89,7 +89,6 @@ describe('testing entry-routes', function() {
             category: 'Sugars'
             , flavorType: 'chocaltey'
             , title: 'the dope flavor'
-            , adjective: ['fast', 'slow']
           })
           .set({
             Authorization: `Bearer ${this.tempToken}`
@@ -112,6 +111,7 @@ describe('testing entry-routes', function() {
             , methodId: this.tempBrewMethod
             , originId: this.tempOrigin
             , flavorId: this.tempFlavor
+            , privacy: false
           })
           .set({
             Authorization: `Bearer ${this.tempToken}`
@@ -135,8 +135,6 @@ describe('testing entry-routes', function() {
     .catch(done);
     });
 
-
-
     //POST 200
     describe('testing POST on /api/entry', () => {
       it('should return a entry', (done) => {
@@ -153,6 +151,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .set({Authorization: `Bearer ${this.tempToken}`})
       .then(res => {
