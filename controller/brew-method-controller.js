@@ -44,6 +44,7 @@ exports.fetchAllBrewMethods = function() {
       .catch(reject);
   });
 };
+
 exports.removeAllBrewMethods = function() {
   return BrewMethod.remove({});
 };

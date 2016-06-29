@@ -58,8 +58,6 @@ exports.fetchAllOrigins = function() {
   });
 };
 
-
 exports.removeAllOrigins = function() {
   return Origin.remove({});
 };
-
