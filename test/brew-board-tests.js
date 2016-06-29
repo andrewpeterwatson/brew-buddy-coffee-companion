@@ -44,7 +44,7 @@ function createEntry(){
       brewMethodId = brewMethod._id;
       return originController.createOrigin({
         country: 'Spokanistan'
-        ,recMethod: brewMethod._id
+        ,recMethod: brewMethodId
       });
 
     })
