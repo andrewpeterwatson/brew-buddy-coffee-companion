@@ -63,12 +63,3 @@ exports.removeAllOrigins = function() {
   return Origin.remove({});
 };
 
-//we added this in//
-exports.fetchOriginSearch = function (country) {
-  debug('fetch origin search');
-  return new Promise((resolve, reject) => {
-    Origin.find({ $text: { $search: 'country' }})
-    .then(resolve)
-    .catch(() => reject(httpErrors(404, 'origin not found')));
-  });
-};
