@@ -26,6 +26,13 @@ exports.fetchFlavor = function(flavorId) {
     .catch(err => reject(httpErrors(400, err.message)));
   });
 };
+exports.fetchAllFlavors = function() {
+  return new Promise((resolve, reject) => {
+    Flavor.find({})
+      .then(resolve)
+      .catch(reject);
+  });
+};
 
 exports.removeAllFlavor = function() {
   return Flavor.remove({});
