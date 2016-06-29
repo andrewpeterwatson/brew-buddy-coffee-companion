@@ -1,14 +1,11 @@
 'use strict';
 
-//npm modules
 const debug = require('debug')('brewBuddy: entry-router');
 const Router = require('express').Router;
 const jsonParser = require('body-parser').json();
-//app modules
 const parseBearerAuth = require('../lib/parse-bearer-auth'); //update when done
 const entryController = require('../controller/entry-controller');
 const httpErrors = require('http-errors');
-//module constants
 const entryRouter = module.exports = new Router();
 
 entryRouter.post('/entry', parseBearerAuth, jsonParser, function(req, res, next){
@@ -22,6 +19,19 @@ entryRouter.get('/entry/all', parseBearerAuth, (req, res, next) => {
   debug('GET /api/entry/all');
   entryController.fetchAllEntries()
   .then((entries) => {
+    res.json(entries);
+  })
+  .catch(next);
+});
+
+entryRouter.get('/entry/search', parseBearerAuth, jsonParser, (req, res, next) => {
+  debug('GET /api/entry/search');
+  debug('query', req.query);
+
+  if (!req.query) return next(httpErrors(400, 'no query found'));
+  entryController.searchEntries(req.query)
+  .then((entries) => {
+    if (entries.length === 0) return res.status(204).send('no entries found');
     res.json(entries);
   })
   .catch(next);
@@ -53,13 +63,3 @@ entryRouter.delete('/entry/:id', parseBearerAuth, function(req, res, next){
   .then(() => res.status(204).send())
   .catch(next);
 });
-
-// entryRouter.get('/entry/search/:id', parseBearerAuth, function(req, res, next) {
-//   debug('GET: api/entry/search/:id', req.params.id);
-//   entryController.fetchEntrySearch(req.params.id)
-//  .then(entry => {
-//    if(!entry) return next(httpErrors(404, 'requested entry is not found'));
-//    res.json(entry);
-//  })
-//  .catch(next);
-// });

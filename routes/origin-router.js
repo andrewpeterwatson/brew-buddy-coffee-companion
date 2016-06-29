@@ -59,15 +59,3 @@ originRouter.delete('/origin/:id', parseBearerAuth, (req, res, next) => {
   .then(() => res.status(204).send())
   .catch(next);
 });
-
-originRouter.get('/origin/all/search/:id', parseBearerAuth, (req, res, next) => {
-  debug('GET /api/origin/search');
-  var something = req.params.id;
-  console.log('contry ???', something);
-  originController.fetchOrigin(req.params.id)
-  .then(origin => {
-    if(!origin) return next(httpErrors(400, 'bad request'));
-    res.json(origin);
-  })
-  .catch(next);
-});

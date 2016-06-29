@@ -314,55 +314,5 @@ describe('testing module origin-router', () => {
         });
       });
     });
-  //
-    describe('GET /api/origin/search', () => {
-      let testOrigin = {};
-      before((done) => {
-        debug('hitting hitting');
-        originController.createOrigin({
-          country: 'CoolCountry',
-          recMethod: 'djfhdjfs'
-        })
-      .then((origin) => {
-        testOrigin = origin;
-        console.log('origin???', origin);
-        done();
-      })
-      .catch(done);
-      });
-
-      it('should return a origin search', (done) => {
-        request.get(`${baseUrl}/origin/search/${testOrigin._id}`)
-      .set({
-        Authorization: `Bearer ${this.tempToken}`
-      })
-      .then((res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body.country).to.equal('CoolCountry');
-        done();
-      })
-      .catch(done);
-      });
-
-    // it('should return a 404 if no origin is found', (done) => {
-    //   request.get(`${baseUrl}/origin/fakeOrigin`)
-    //   .set({
-    //     Authorization: `Bearer ${this.tempToken}`
-    //   })
-    //   .catch((err) => {
-    //     expect(err.response.status).to.equal(404);
-    //     done();
-    //   });
-    // });
-    //
-    // it('should return a 401 if no token is sent', (done) => {
-    //   request.get(`${baseUrl}/origin/${testOrigin._id}`)
-    //   .catch((err) => {
-    //     expect(err.response.status).to.equal(401);
-    //     done();
-    //   });
-    // });
-    });
-  //
   });
 });

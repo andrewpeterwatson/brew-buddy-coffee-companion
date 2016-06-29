@@ -465,44 +465,32 @@ describe('testing entry-routes', function() {
       });
     });
 
-    // describe('GET /api/entry/search', () => {
-    //   it('should return a search result', (done) => {
-    //     debug('gitting get/api/search');
-    //
-    //     request.get(`${baseUrl}/entry/search/${this.tempEntry}`)
-    //   .set({
-    //     Authorization: `Bearer ${this.tempToken}`
-    //   })
-    //   .then((res) => {
-    //     expect(res.status).to.equal(200);
-    //     done();
-    //   })
-    //   .catch(done);
-    //   });
-    //
-    //   it('should return a 404 if no search is found', (done) => {
-    //     request.get(`${baseUrl}/entry/search/fakesearch`)
-    //   .set({
-    //     Authorization: `Bearer ${this.tempToken}`
-    //   })
-    //   // .then(done)
-    //   .catch((err) => {
-    //     expect(err.response.status).to.equal(404);
-    //     done();
-    //   });
-    //   });
-    //
-    //   it('should return a 401 if no search is sent', (done) => {
-    //     request.get(`${baseUrl}/entry/search/${this.tempEntry}`)
-    //     .then(done)
-    //   .catch((err) => {
-    //     let res = err.response;
-    //     expect(err.response.status).to.equal(401);
-    //     console.log('hitting 401', res.text);
-    //     done();
-    //   })
-    //   .catch(done);
-    //   });
-    // });
+    describe('GET /api/entry/search', () => {
+      it('should return a result', (done) => {
+        debug('searching entries');
+        request.get(`${baseUrl}/entry/search?body=bold`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then((res) => {
+          expect(res.status).to.equal(200);
+          done();
+        })
+        .catch(done);
+      });
+
+      it('should return a 204 if nothing is found', (done) => {
+        debug('testing for 204 search');
+        request.get(`${baseUrl}/entry/search?body=fuckoff`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then((res) => {
+          expect(res.status).to.equal(204);
+          done();
+        })
+        .catch(done);
+      });
+    });
   });
 });
