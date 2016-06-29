@@ -3,6 +3,7 @@
 const debug = require('debug')('brewBuddy:entry-controller');
 const Entry = require('../model/entry-model');
 const httpErrors = require('http-errors');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 exports.createEntry = function(entryData){
   debug('createEntry');
@@ -27,6 +28,15 @@ exports.fetchAllEntries = function() {
   debug('fetching all enties');
   return new Promise((resolve, reject) => {
     Entry.find({})
+    .then(resolve)
+    .catch(reject);
+  });
+};
+
+exports.fetchEntriesByFlavor = function(flavorId) {
+  debug('fetchEntriesByFlavor');
+  return new Promise((resolve, reject) => {
+    Entry.find({flavorId: new ObjectId(flavorId)})
     .then(resolve)
     .catch(reject);
   });

@@ -5,7 +5,7 @@ const debug = require('debug')('brewbuddie:flavor-route');
 const jsonParser = require('body-parser').json();
 const flavorController = require('../controller/flavor-controller');
 const parserBearerAuth = require('../lib/parse-bearer-auth');
-
+const entryController = require('../controller/entry-controller');
 
 const flavorRouter = module.exports = new Router;
 
@@ -20,6 +20,15 @@ flavorRouter.post('/flavor', jsonParser, parserBearerAuth, function(req, res, ne
 });
 flavorRouter.get('/flavor/all', parserBearerAuth, jsonParser, (req, res, next) => {
   flavorController.fetchAllFlavors()
+  .then((flavor) => {
+    res.json(flavor);
+  })
+  .catch(next);
+});
+
+flavorRouter.get('/flavor/:id/entries', parserBearerAuth, (req, res, next) => {
+  debug('get entries with origin');
+  entryController.fetchEntriesByFlavor(req.params.id)
   .then((flavor) => {
     res.json(flavor);
   })

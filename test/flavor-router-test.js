@@ -12,6 +12,9 @@ const debug = require('debug')('brewbuddie:flavor-router-test');
 const flavorController = require('../controller/flavor-controller');
 const authController = require('../controller/auth-controller');
 const userController = require('../controller/user-controller');
+const entryController = require('../controller/entry-controller');
+const originController = require('../controller/origin-controller');
+const brewMethodController = require('../controller/brew-method-controller');
 
 const port = process.env.PORT || 3000;
 const baseURL = `localhost:${port}/api`;
@@ -173,8 +176,108 @@ describe('testing module flavor-router', () => {
       })
       .catch(done);
     });
-
   });
+
+  describe('testing flavor/:id/entries', () => {
+    beforeEach((done) => {
+      authController.signup({username: 'Kyle', password:'Justin'})
+        .then(token => {
+          this.tempToken = token;
+          return token;
+        })
+          .then((token) => {
+            return request.post(`${baseURL}/method`)
+            .send({
+              title: 'RimRafBrew',
+              recipe: 'First Rim. Then Raf. Repeat',
+              brewRatio: 3,
+              brewTimer: 3
+            })
+            .set({
+              Authorization: `Bearer ${token}`
+            });
+          })
+          .then(res => {
+            this.tempBrewMethod = res.body._id;
+            return request.post(`${baseURL}/origin`)
+            .send({
+              country: 'Spokanistan'
+              ,recMethod: this.tempBrewMethod._id
+            })
+            .set({
+              Authorization: `Bearer ${this.tempToken}`
+            });
+          })
+          .then(res => {
+            this.tempOrigin = res.body._id;
+          })
+          .then( () => {
+            return request.post(`${baseURL}/flavor`)
+            .send({
+
+              category: 'Sugars'
+              , flavorType: 'chocaltey'
+              , title: 'the dope flavor'
+              , adjective: ['fast', 'slow']
+            })
+            .set({
+              Authorization: `Bearer ${this.tempToken}`
+            });
+          })
+          .then(res => {
+            this.tempFlavor2 = res.body._id;
+          })
+          .then( () => {
+            return request.post(`${baseURL}/entry`)
+            .send({
+              date: new Date()
+              , aromas: ['feet', 'garbage', 'dirty diapers']
+              , acidity: 'low'
+              , body: 'bold'
+              , finish: 'smooth'
+              , experience: 'dopeness'
+              , rating: 4
+              , username: 'Kyle'
+              , methodId: this.tempBrewMethod
+              , originId: this.tempOrigin
+              , flavorId: this.tempFlavor2
+            })
+            .set({
+              Authorization: `Bearer ${this.tempToken}`
+            });
+          })
+          .then(res => {
+            this.tempEntry = res.body._id;
+            debug('FUCKING CREATING ENTRY ****************************************');
+            console.log('this.entry', this.tempEntry);
+            done();
+          })
+          .catch(done);
+    });
+
+    afterEach((done) => {
+      Promise.all([
+        userController.removeAllUsers()
+        , entryController.removeAllEntries()
+        , originController.removeAllOrigins()
+        , brewMethodController.removeAllBrewMethods()
+      ])
+      .then(() => done())
+      .catch(done);
+    });
+  });
+
+  it('should return an array of entries', (done) => {
+    request.get(`${baseURL}/flavor/${this.tempFlavor2._id}/entries`)
+      .set({Authorization: `Bearer ${this.tempToken}`})
+      .then(res => {
+        expect(res.body).to.be.an('Array');
+        console.log('res.body', res.body);
+        expect(res.body.length).to.equal(1);
+      })
+      .catch(done);
+  });
+
 
 
   describe('testing PUT api/flavor', function() {
