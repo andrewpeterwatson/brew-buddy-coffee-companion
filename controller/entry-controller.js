@@ -7,7 +7,6 @@ const httpErrors = require('http-errors');
 exports.createEntry = function(entryData){
   debug('createEntry');
   return new Promise((resolve, reject) => {
-    console.log(entryData);
     new Entry(entryData).save()
     .then( entry => resolve(entry))
     .catch( err => reject(httpErrors(400, err.message)));
@@ -59,4 +58,13 @@ exports.removeOneEntry = function(entryId){
 
 exports.removeAllEntries = function(){
   return Entry.remove({});
+};
+
+exports.searchEntries = function(reqQuery) {
+  debug('searching entries');
+  return new Promise((resolve, reject) => {
+    Entry.find(reqQuery)
+    .then(resolve)
+    .catch(reject);
+  });
 };

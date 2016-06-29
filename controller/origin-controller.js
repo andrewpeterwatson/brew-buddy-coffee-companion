@@ -9,7 +9,7 @@ exports.createOrigin = function(originData) {
   return new Promise((resolve, reject) => {
     new Origin(originData).save()
     .then(origin => resolve(origin))
-    .catch(err => reject(httpErrors(400, err.message)));
+    .catch(() => reject(httpErrors(400, 'origin not created')));
   });
 };
 
@@ -58,6 +58,8 @@ exports.fetchAllOrigins = function() {
   });
 };
 
+
 exports.removeAllOrigins = function() {
   return Origin.remove({});
 };
+
