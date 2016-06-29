@@ -54,12 +54,12 @@ entryRouter.delete('/entry/:id', parseBearerAuth, function(req, res, next){
   .catch(next);
 });
 
-entryRouter.get('/entry/search/:id', parseBearerAuth, function(req, res, next) {
-  debug('GET: api/entry/search/:id', req.params.id);
-  entryController.fetchEntrySearch(req.params.id)
- .then(entry => {
-   if(!entry) return next(httpErrors(404, 'requested entry is not found'));
-   res.json(entry);
- })
- .catch(next);
-});
+// entryRouter.get('/entry/search/:id', parseBearerAuth, function(req, res, next) {
+//   debug('GET: api/entry/search/:id', req.params.id);
+//   entryController.fetchEntrySearch(req.params.id)
+//  .then(entry => {
+//    if(!entry) return next(httpErrors(404, 'requested entry is not found'));
+//    res.json(entry);
+//  })
+//  .catch(next);
+// });
