@@ -8,7 +8,6 @@ const httpErrors = require('http-errors');
 exports.createFlavor = function(reqBody) {
   debug('createFlavor');
   return new Promise((resolve, reject) =>{
-
     new Flavor(reqBody)
     .save()
     .then((flavor) => {

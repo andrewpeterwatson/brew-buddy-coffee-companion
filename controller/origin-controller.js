@@ -3,7 +3,11 @@
 const debug = require('debug')('brewBuddy:origin-controller');
 const httpErrors = require('http-errors');
 const Origin = require('../model/origin');
+const Method = require('../model/brew-method');
+
+
 const ObjectId = require('mongoose').Types.ObjectId;
+
 
 exports.createOrigin = function(originData) {
   debug('creating origin');
@@ -56,6 +60,26 @@ exports.fetchAllOrigins = function() {
     Origin.find({})
     .then(resolve)
     .catch(reject);
+  });
+};
+
+exports.removeAllOrigins = function() {
+  return Origin.remove({});
+};
+
+exports.fetchRecmethodByCountry = function(country) {
+  debug('search origin controller');
+  return new Promise((resolve, reject) => {
+    Origin.findOne({country: country})
+    .then((country) => {
+      country.recMethod;
+    })
+
+   .then((recMethod) => Method.find({_id: recMethod}))
+   .then((recMethod) => {
+     resolve(recMethod);
+   })
+   .catch(reject);
   });
 };
 
