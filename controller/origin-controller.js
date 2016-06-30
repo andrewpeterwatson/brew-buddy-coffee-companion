@@ -63,9 +63,6 @@ exports.fetchAllOrigins = function() {
 exports.removeAllOrigins = function() {
   return Origin.remove({});
 };
-<<<<<<< HEAD
-
-
 
 exports.fetchRecmethodByCountry = function(country) {
   debug('search origin controller');
@@ -73,7 +70,7 @@ exports.fetchRecmethodByCountry = function(country) {
     Origin.findOne({country: country})
     .then((country) => {
       country.recMethod;
-  
+
     })
 
    .then((recMethod) => Method.find({_id: recMethod}))
@@ -83,5 +80,3 @@ exports.fetchRecmethodByCountry = function(country) {
    .catch(reject);
   });
 };
-=======
->>>>>>> 549ee1674c7f78e2d3be050645ed8d49ebc4f50a
