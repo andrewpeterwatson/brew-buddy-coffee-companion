@@ -24,7 +24,6 @@ const server = require('../server');
 request.use(superPromise);
 
 let TOKEN;
-let BUDDYTOKEN;
 
 function createBuddy(){
   var brewMethodId;
@@ -32,9 +31,7 @@ function createBuddy(){
   var flavorId;
   return new Promise((resolve, reject) => {
     authController.signup({username: 'kyle', password: '1234'})
-    .then( (token) => {
-      BUDDYTOKEN = token;
-      console.log(BUDDYTOKEN);
+    .then( () => {
       return brewMethodController.createBrewMethod({
         title: 'The Title'
         , recipe: ['goodStuff', 'badStuff']

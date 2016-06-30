@@ -23,7 +23,6 @@ const server = require('../server');
 request.use(superPromise);
 
 
-
 describe('testing entry-routes', function() {
   before((done) => {
     debug('before entry-routes');
@@ -163,7 +162,6 @@ describe('testing entry-routes', function() {
       });
     });
 
-  //POST 400
     describe('testing POST on /api/entry with bad data', () => {
       it('should return a 400 bad request', (done) => {
         request.post(`${baseUrl}/entry`)
@@ -228,7 +226,7 @@ describe('testing entry-routes', function() {
       });
       });
     });
-  //GET Tests
+
     describe('GET /api/entry', () => {
       it('should return a entry', (done) => {
         request.get(`${baseUrl}/entry/${this.tempEntry}`)
@@ -262,8 +260,13 @@ describe('testing entry-routes', function() {
       });
       });
     });
+<<<<<<< HEAD
 //Get all
     describe('GET /api/entry/all/username', () => {
+=======
+
+    describe('GET /api/entry/all', () => {
+>>>>>>> 0abd02fdfa726e18005a79d8fa7f1ed0bb0e9068
       before((done) => {
         Promise.all([
           entryController.createEntry({
@@ -314,7 +317,6 @@ describe('testing entry-routes', function() {
       });
     });
 
-//PUT testing
     describe('PUT /api/entry/:id', () => {
       before((done) => {
         entryController.createEntry({
@@ -422,7 +424,6 @@ describe('testing entry-routes', function() {
       });
     });
 
-  //DELETE routes
     describe('DELETE /api/entry/:id', () => {
       before((done) => {
         entryController.createEntry({
@@ -476,6 +477,33 @@ describe('testing entry-routes', function() {
       });
       });
     });
-  });
 
+    describe('GET /api/entry/search', () => {
+      it('should return a result', (done) => {
+        debug('searching entries');
+        request.get(`${baseUrl}/entry/search?body=bold`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then((res) => {
+          expect(res.status).to.equal(200);
+          done();
+        })
+        .catch(done);
+      });
+
+      it('should return a 204 if nothing is found', (done) => {
+        debug('testing for 204 search');
+        request.get(`${baseUrl}/entry/search?body=fuckoff`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then((res) => {
+          expect(res.status).to.equal(204);
+          done();
+        })
+        .catch(done);
+      });
+    });
+  });
 });
