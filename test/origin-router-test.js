@@ -84,7 +84,6 @@ describe('testing module origin-router', () => {
       .catch(done);
     });
 
-    //begin testing here
     describe('testing /api/origin', () => {
       describe('POST /api/origin', () => {
         it('should return an origin', (done) => {
@@ -208,7 +207,6 @@ describe('testing module origin-router', () => {
         });
 
         it('should return a origin', (done) => {
-          console.log('TOKEN:', testOrigin);
           request.get(`${baseUrl}/origin/${testOrigin._id}`)
           .set({
             Authorization: `Bearer ${this.tempToken}`
