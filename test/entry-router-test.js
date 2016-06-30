@@ -260,13 +260,9 @@ describe('testing entry-routes', function() {
       });
       });
     });
-<<<<<<< HEAD
-//Get all
-    describe('GET /api/entry/all/username', () => {
-=======
 
+//Get all
     describe('GET /api/entry/all', () => {
->>>>>>> 0abd02fdfa726e18005a79d8fa7f1ed0bb0e9068
       before((done) => {
         Promise.all([
           entryController.createEntry({
