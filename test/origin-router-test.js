@@ -318,7 +318,7 @@ describe('testing module origin-router', () => {
       });
     });
 
-    describe('GET: /api/origin/search', () => {
+    describe('GET: /api/origin/method', () => {
       before((done) => {
         var testOrigin = {};
         debug('testOrigin:', testOrigin);
@@ -345,8 +345,8 @@ describe('testing module origin-router', () => {
       });
 
       it('should return country + recMethod', (done) => {
-        debug('~~~~~~~~~~~~search IT block', this.tempToken);
-        request.get(`${baseUrl}/origin/search?country=Coolio`)
+        debug('~~~~~~~~~~~~method IT block', this.tempToken);
+        request.get(`${baseUrl}/origin/method?country=Coolio`)
         .set({
           Authorization: `Bearer ${this.tempToken}`
         })
@@ -370,7 +370,7 @@ describe('testing module origin-router', () => {
       });
 
       it('should return a 401 if no token is sent', (done) => {
-        request.get(`${baseUrl}/origin/search?country=Coolio`)
+        request.get(`${baseUrl}/origin/method?country=Coolio`)
         .then(done)
         .catch((err) => {
           expect(err.response.status).to.equal(401);
