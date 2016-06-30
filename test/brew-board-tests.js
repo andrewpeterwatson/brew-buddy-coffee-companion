@@ -184,7 +184,6 @@ describe('testing brewBoard-route', function() {
     });
 
     it('should return an array of entries for the Brew Board', (done) => {
-      console.log('hit second');
       createEntry()
       .then(entry => {
         this.entry = entry;
@@ -195,7 +194,6 @@ describe('testing brewBoard-route', function() {
         .then((res) => {
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('array');
-          console.log(res.body.length);
           expect(res.body.length).to.equal(1);
           expect(res.body[0].finish).to.equal('smooth AF');
           expect(res.body[0].username).to.equal('kyle');
