@@ -28,6 +28,12 @@ originRouter.get('/origin/all', parseBearerAuth, (req, res, next) => {
 });
 
 
+originRouter.get('/origin', (req, res, next) => {
+  debug('GET /api/orign');
+  next(httpErrors(400, 'no ide provided'));
+});
+
+
 originRouter.get('/origin/:id', parseBearerAuth, (req, res, next) => {
   debug('GET /api/origin/:id', req.params.id);
   originController.fetchOrigin(req.params.id)
@@ -56,6 +62,7 @@ originRouter.delete('/origin/:id', parseBearerAuth, (req, res, next) => {
 });
 
 
+//Take a look at this before mergign
 originRouter.get('/origin/search', parseBearerAuth, (req, res, next) => {
   debug('SEARCH /api/all/search');
   originController.fetchRecmethodByCountry(req.query.country)

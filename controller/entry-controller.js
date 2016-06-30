@@ -7,7 +7,6 @@ const httpErrors = require('http-errors');
 exports.createEntry = function(entryData){
   debug('createEntry');
   return new Promise((resolve, reject) => {
-    console.log(entryData);
     new Entry(entryData).save()
     .then( entry => resolve(entry))
     .catch( err => reject(httpErrors(400, err.message)));
@@ -60,12 +59,12 @@ exports.removeOneEntry = function(entryId){
 exports.removeAllEntries = function(){
   return Entry.remove({});
 };
-//
-// exports.fetchEntrySearch = function(entryId){
-//   debug('fetching entry by request');
-//   return new Promise((resolve, reject) => {
-//     Entry.find({_id: entryId}).limit(10)
-//    .then( entry => resolve(entry))
-//    .catch(() => reject(httpErrors(404, 'Search not Found')));
-//   });
-// };
+
+exports.searchEntries = function(reqQuery) {
+  debug('searching entries');
+  return new Promise((resolve, reject) => {
+    Entry.find(reqQuery)
+    .then(resolve)
+    .catch(reject);
+  });
+};

@@ -1,0 +1,232 @@
+[
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vanilla",
+    "title": "Vanilla"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Black Tea",
+    "title": "Earl Grey"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Floral",
+    "title": "Chamomile"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Floral",
+    "title": "Rose"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Floral",
+    "title": "Jasmine"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Berry",
+    "title": "Blackberry"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Berry",
+    "title": "Raspberry"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Berry",
+    "title": "Blueberry"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Berry",
+    "title": "Strawberry"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Berry",
+    "title": "Grape"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Dried Fruit",
+    "title": "Raisin"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Dried Fruit",
+    "title": "Prune"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Stone Fruit",
+    "title": "Peach"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Stone Fruit",
+    "title": "Plum"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Stone Fruit",
+    "title": "Cherry"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Stone Fruit",
+    "title": "Nectarine"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Stone Fruit",
+    "title": "Peach"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Stone Fruit",
+    "title": "Apricot"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Tropical",
+    "title": "Coconut"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Tropical",
+    "title": "Pineapple"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Tropical",
+    "title": "Pomegranate"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Pome",
+    "title": "Apple"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Pome",
+    "title": "Pear"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Citrus Fruit",
+    "title": "Grapefruit"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Citrus Fruit",
+    "title": "Orange"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Citrus Fruit",
+    "title": "Lemon"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Citrus Fruit",
+    "title": "Lime"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Sour",
+    "title": "Sour Aromatics"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Sour",
+    "title": "Acetic Acid"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Sour",
+    "title": "Butyric Acid"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Sour",
+    "title": "Isovaleric Acid"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Sour",
+    "title": "Citric Acid"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Sour",
+    "title": "Malic Acid"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Alcohol/Fermented",
+    "title": "Winey"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Alcohol/Fermented",
+    "title": "Whiskey"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Alcohol/Fermented",
+    "title": "Fermented"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Alcohol/Fermented",
+    "title": "Overripe"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vegetative",
+    "title": "olive Oil"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vegetative",
+    "title": "Under Ripe"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vegetative",
+    "title": "Peapod"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vegetative",
+    "title": "Fresh"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vegetative",
+    "title": "Dark Green"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vegetative",
+    "title": "Vegetative"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vegetative",
+    "title": "Hay-Like"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vegetative",
+    "title": "Herb-Like"
+  },
+  {
+    "category": "Fruits and Florals",
+    "flavorType": "Vegetative",
+    "title": "Beany"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "category": "Other",
+    "flavorType": "Papery/Musty",
+    "title": "Stale"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Papery/Musty",
+    "title": "Cardboard"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Papery/Musty",
+    "title": "Woody"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Papery/Musty",
+    "title": "Moldy/Damp"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Papery/Musty",
+    "title": "Musty/Earthy"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Papery/Musty",
+    "title": "Animalic"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Papery/Musty",
+    "title": "Meaty Brothy"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Papery/Musty",
+    "title": "Phenolic"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Chemical",
+    "title": "Bitter"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Chemical",
+    "title": "Salty"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Chemical",
+    "title": "Medicinal"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Chemical",
+    "title": "Petroleum"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Chemical",
+    "title": "Skunky"
+  },
+  {
+    "category": "Other",
+    "flavorType": "Chemical",
+    "title": "Rubber"
+  }
+]

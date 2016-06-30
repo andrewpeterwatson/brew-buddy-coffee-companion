@@ -318,9 +318,6 @@ describe('testing module origin-router', () => {
       });
     });
 
-
-///////////////////////
-
     describe('GET: /api/origin/search', () => {
       before((done) => {
         var testOrigin = {};
@@ -395,6 +392,7 @@ describe('testing module origin-router', () => {
         .catch(done);
       });
     });
+
   });
 });
 // });
