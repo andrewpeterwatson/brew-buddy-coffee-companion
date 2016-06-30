@@ -32,6 +32,15 @@ exports.fetchAllEntries = function(userId) {
   });
 };
 
+exports.fetchEntriesByFlavor = function(flavorId) {
+  debug('fetchEntriesByFlavor');
+  return new Promise((resolve, reject) => {
+    Entry.find({flavorId: new ObjectId(flavorId)})
+    .then(resolve)
+    .catch(reject);
+  });
+};
+
 exports.updateEntry = function(entryId, entryData){
   debug('updating entry', entryId);
   return new Promise((resolve, reject) => {

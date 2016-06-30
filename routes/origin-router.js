@@ -32,6 +32,7 @@ originRouter.get('/origin', (req, res, next) => {
   next(httpErrors(400, 'no ide provided'));
 });
 
+
 originRouter.get('/origin/method', parseBearerAuth, (req, res, next) => {
   debug('SEARCH /api/all/search');
   originController.fetchRecmethodByCountry(req.query.country)
