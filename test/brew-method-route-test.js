@@ -11,6 +11,7 @@ const debug = require('debug')('brewBuddy:brew-method-route-test');
 const brewMethodController = require('../controller/brew-method-controller');
 const authController = require('../controller/auth-controller');
 const userController = require('../controller/user-controller');
+const originController = require('../controller/origin-controller');
 
 const port = process.env.PORT || 3000;
 const baseUrl = `localhost:${port}/api`;
@@ -59,10 +60,54 @@ describe('testing brew-method-routes', function() {
         .set({
           Authorization: `Bearer ${token}`
         })
-        .then(res => {
+        .then((res) => {
           this.tempBrewMethod = res.body;
+          return request.post(`${baseUrl}/origin`)
+          .send({
+            country: 'awesome origin',
+            recMethod: this.tempBrewMethod._id
+          })
+          .set({
+            Authorization: `Bearer ${token}`
+          });
+        })
+        .then((res) => {
+          this.tempOrigin = res.body;
+          return request.post(`${baseUrl}/flavor`)
+          .send({
+            category: 'my category',
+            flavorType: 'my flavor type',
+            title: 'my awesome title'
+          })
+          .set({
+            Authorization: `Bearer ${token}`
+          });
+        })
+        .then((res) => {
+          this.tempFlavor = res.body;
+          return request.post(`${baseUrl}/entry`)
+          .send({
+            date: Date.now(),
+            aromas: ['my aroma'],
+            acidity: 'my acid',
+            body: 'my body',
+            finish: 'my finish',
+            experience: 'my experience',
+            rating: 4,
+            username: 'rimraf',
+            methodId: this.tempBrewMethod._id,
+            originId: this.tempOrigin._id,
+            flavorId: [this.tempFlavor._id]
+          })
+          .set({
+            Authorization: `Bearer ${token}`
+          });
+        })
+        .then((res) => {
+          this.tempEntry = res.body;
           done();
-        }).catch(done);
+        })
+        .catch(done);
       });
     });
 
@@ -254,6 +299,20 @@ describe('testing brew-method-routes', function() {
           done();
         })
         .catch(done);
+      });
+    });
+
+    describe('/testing GET /api/method/:id/origins', () => {
+      it('should return a 200', (done) => {
+        request.get(`${baseUrl}/method/${this.tempBrewMethod._id}/entries`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then(res => {
+          expect(res.status).to.equal(200);
+          expect(res.body.length).to.equal(1);
+          done();
+        });
       });
     });
   });
