@@ -24,13 +24,68 @@ const server = require('../server');
 request.use(superPromise);
 
 let TOKEN;
+let BUDDYTOKEN;
+
+function createBuddy(){
+  var brewMethodId;
+  var originId;
+  var flavorId;
+  return new Promise((resolve, reject) => {
+    authController.signup({username: 'kyle', password: '1234'})
+    .then( (token) => {
+      BUDDYTOKEN = token;
+      console.log(BUDDYTOKEN);
+      return brewMethodController.createBrewMethod({
+        title: 'The Title'
+        , recipe: ['goodStuff', 'badStuff']
+        , brewRatio: 3
+        , brewTimer: 4
+      });
+    })
+    .then( (brewMethod) => {
+      brewMethodId = brewMethod._id;
+      return originController.createOrigin({
+        country: 'Spokanistan'
+        ,recMethod: brewMethodId
+      });
+
+    })
+    .then( (origin) => {
+      originId = origin._id;
+      return flavorController.createFlavor({
+        category: 'Bold'
+        , flavorType: 'Sweet'
+        , title: 'the sweet and the bold'
+      });
+    })
+    .then( (flavor) => {
+      flavorId = flavor._id;
+      entryController.createEntry({
+        date: new Date()
+        , aromas: ['lemon zest', 'orange zest', 'baby powder']
+        , acidity: 'it burns'
+        , body: 'bold'
+        , finish: 'smooth AF'
+        , experience: 'dopeness'
+        , rating: 4
+        , username: 'kyle'
+        , methodId: brewMethodId
+        , originId: originId
+        , flavorId: flavorId
+        , privacy: false
+      })
+      .then(entry => resolve(entry));
+    })
+    .catch(reject);
+  });
+}
 
 function createEntry(){
   var brewMethodId;
   var originId;
   var flavorId;
   return new Promise((resolve, reject) => {
-    authController.signup({username: 'sluggys', password: '1234'})
+    authController.signup({username: 'sluggys', password: '1234', buddies: ['kyle']})
     .then( (token) => {
       TOKEN = token;
       return brewMethodController.createBrewMethod({
@@ -106,6 +161,15 @@ describe('testing brewBoard-route', function() {
 
 //Testing GET on Brew Board
   describe('GET /api/brewBoard', () => {
+    before((done) => {
+      console.log('hit first');
+      createBuddy()
+      .then( entry => {
+        this.entry = entry;
+        done();
+      })
+      .catch( (err)=> console.error(err));
+    });
 
     after((done) => {
       Promise.all([
@@ -120,6 +184,7 @@ describe('testing brewBoard-route', function() {
     });
 
     it('should return an array of entries for the Brew Board', (done) => {
+      console.log('hit second');
       createEntry()
       .then(entry => {
         this.entry = entry;
@@ -130,7 +195,10 @@ describe('testing brewBoard-route', function() {
         .then((res) => {
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('array');
+          console.log(res.body.length);
           expect(res.body.length).to.equal(1);
+          expect(res.body[0].finish).to.equal('smooth AF');
+          expect(res.body[0].username).to.equal('kyle');
           done();
         })
         .catch(done);
