@@ -23,12 +23,12 @@ exports.fetchEntry = function(entryId){
   });
 };
 
-exports.fetchAllEntries = function() {
+exports.fetchAllEntries = function(userId) {
   debug('fetching all enties');
   return new Promise((resolve, reject) => {
-    Entry.find({})
+    Entry.find({username: userId})
     .then(resolve)
-    .catch(reject);
+    .catch(err => reject(httpErrors(404, err.message)));
   });
 };
 
@@ -46,7 +46,7 @@ exports.updateEntry = function(entryId, entryData){
   return new Promise((resolve, reject) => {
     if (Object.keys(entryData).length === 0) return reject(httpErrors(400, 'need to provide a body'));
 
-    const entryKeys = ['date', 'aromas', 'acidity', 'body', 'finish', 'experience' ,'rating', 'username', 'methodId', 'originId', 'flavorId'];
+    const entryKeys = ['date', 'aromas', 'acidity', 'body', 'finish', 'experience' ,'rating', 'username', 'methodId', 'originId', 'flavorId', 'privacy'];
     Object.keys(entryData).forEach((key) => {
       if (entryKeys.indexOf(key) === -1) return reject(httpErrors(400, 'key does not exist'));
     });
