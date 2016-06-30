@@ -19,6 +19,8 @@ const server = require('../server');
 
 request.use(superPromise);
 
+var TOKEN;
+
 describe('testing module origin-router', () => {
   before((done) => {
     debug('before module-auth');
@@ -191,6 +193,7 @@ describe('testing module origin-router', () => {
         });
 
       });
+///////////
 
       describe('GET /api/origin', () => {
         let testOrigin = {};
@@ -314,55 +317,84 @@ describe('testing module origin-router', () => {
         });
       });
     });
-  //
-    describe('GET /api/origin/search', () => {
-      let testOrigin = {};
+
+
+///////////////////////
+
+    describe('GET: /api/origin/search', () => {
       before((done) => {
-        debug('hitting hitting');
-        originController.createOrigin({
-          country: 'CoolCountry',
-          recMethod: 'djfhdjfs'
+        var testOrigin = {};
+        debug('testOrigin:', testOrigin);
+        debug('TOKEN: ', TOKEN);
+        authController
+        .signup({username:'namasdeuse3', password:'88881asds0000'})
+        .then( (token) => {
+          TOKEN = token;
+        });
+        return brewMethodController
+        .createBrewMethod({
+          title: 'ABC'
+          , recipe: 'shity'
+          , brewRatio: 1
+          , brewTimer: 4
         })
-      .then((origin) => {
-        testOrigin = origin;
-        console.log('origin???', origin);
-        done();
-      })
-      .catch(done);
+        .then((brewMethod) => {
+          return originController
+         .createOrigin({
+           country: 'Coolio',
+           recMethod: brewMethod._id
+         })
+           .then((origin) => {
+             testOrigin = origin;
+             done();
+           });
+        });
+      });
+      after((done) => {
+        Promise.all([
+          userController.removeAllUsers(),
+          originController.removeAllOrigins(),
+          brewMethodController.removeAllBrewMethods()
+        ])
+        .then(() => done())
+        .catch(done);
       });
 
-      it('should return a origin search', (done) => {
-        request.get(`${baseUrl}/origin/search/${testOrigin._id}`)
-      .set({
-        Authorization: `Bearer ${this.tempToken}`
-      })
-      .then((res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body.country).to.equal('CoolCountry');
-        done();
-      })
-      .catch(done);
+      it('should return country + recMethod', (done) => {
+        debug('~~~~~~~~~~~~search IT block', TOKEN);
+        request.get(`${baseUrl}/origin/search?country=Coolio`)
+        .set({
+          Authorization: `Bearer ${TOKEN}`
+        })
+        .then((res) => {
+          expect(res.status).to.equal(200);
+          done();
+        })
+        .catch(done);
+      });
+      it('should return a 404 if no origin is found', (done) => {
+        request.get(`${baseUrl}/origin/fakeOrigin`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .catch((err) => {
+          expect(err.response.status).to.equal(404);
+          expect(err.response.text).to.eql('NotFoundError');
+          done();
+        });
       });
 
-    // it('should return a 404 if no origin is found', (done) => {
-    //   request.get(`${baseUrl}/origin/fakeOrigin`)
-    //   .set({
-    //     Authorization: `Bearer ${this.tempToken}`
-    //   })
-    //   .catch((err) => {
-    //     expect(err.response.status).to.equal(404);
-    //     done();
-    //   });
-    // });
-    //
-    // it('should return a 401 if no token is sent', (done) => {
-    //   request.get(`${baseUrl}/origin/${testOrigin._id}`)
-    //   .catch((err) => {
-    //     expect(err.response.status).to.equal(401);
-    //     done();
-    //   });
-    // });
+      it('should return a 401 if no token is sent', (done) => {
+        request.get(`${baseUrl}/origin/search?country=Coolio`)
+        .then(done)
+        .catch((err) => {
+          expect(err.response.status).to.equal(401);
+          expect(err.response.text).to.eql('UnauthorizedError');
+          done();
+        })
+        .catch(done);
+      });
     });
-  //
   });
 });
+// });
