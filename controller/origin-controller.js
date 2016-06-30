@@ -6,6 +6,9 @@ const Origin = require('../model/origin');
 const Method = require('../model/brew-method');
 
 
+const ObjectId = require('mongoose').Types.ObjectId;
+
+
 exports.createOrigin = function(originData) {
   debug('creating origin');
   return new Promise((resolve, reject) => {
@@ -78,4 +81,17 @@ exports.fetchRecmethodByCountry = function(country) {
    })
    .catch(reject);
   });
+};
+
+exports.fetchOriginsByMethodId = function(methodId) {
+  debug('fetching all origins by method id');
+  return new Promise((resolve, reject) => {
+    Origin.find({recMethod: new ObjectId(methodId)})
+    .then(resolve)
+    .catch(reject);
+  });
+};
+
+exports.removeAllOrigins = function() {
+  return Origin.remove({});
 };

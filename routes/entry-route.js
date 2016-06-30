@@ -15,14 +15,24 @@ entryRouter.post('/entry', parseBearerAuth, jsonParser, function(req, res, next)
   .catch(next);
 });
 
-entryRouter.get('/entry/all', parseBearerAuth, (req, res, next) => {
-  debug('GET /api/entry/all');
+entryRouter.get('/entry/all/:username', parseBearerAuth, (req, res, next) => {
+  debug('GET /api/entry/all/:username');
+  entryController.fetchAllEntries(req.params.username)
+  .then((entries) => {
+    res.json(entries);
+  })
+  .catch(next);
+});
+
+entryRouter.get('/entry/all/', parseBearerAuth, (req, res, next) => {
+  debug('GET /api/entry/all/');
   entryController.fetchAllEntries()
   .then((entries) => {
     res.json(entries);
   })
   .catch(next);
 });
+
 
 entryRouter.get('/entry/search', parseBearerAuth, jsonParser, (req, res, next) => {
   debug('GET /api/entry/search');
