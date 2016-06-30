@@ -299,7 +299,7 @@ describe('testing entry-routes', function() {
       });
 
       it('should return an array of entries', (done) => {
-        request.get(`${baseUrl}/entry/Kyle`)
+        request.get(`${baseUrl}/entry/all/Kyle`)
         .set({
           Authorization: `Bearer ${this.tempToken}`
         })
