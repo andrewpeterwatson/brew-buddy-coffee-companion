@@ -3,6 +3,7 @@
 const debug = require('debug')('brewBuddy:entry-controller');
 const Entry = require('../model/entry-model');
 const httpErrors = require('http-errors');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 exports.createEntry = function(entryData){
   debug('createEntry');
@@ -64,6 +65,15 @@ exports.searchEntries = function(reqQuery) {
   debug('searching entries');
   return new Promise((resolve, reject) => {
     Entry.find(reqQuery)
+    .then(resolve)
+    .catch(reject);
+  });
+};
+
+exports.fetchEntriesByMethodId = function(methodId) {
+  debug('searching for entries by method id');
+  return new Promise((resolve, reject) => {
+    Entry.find({methodId: new ObjectId(methodId)})
     .then(resolve)
     .catch(reject);
   });

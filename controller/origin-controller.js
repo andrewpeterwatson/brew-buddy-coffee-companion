@@ -3,6 +3,7 @@
 const debug = require('debug')('brewBuddy:origin-controller');
 const httpErrors = require('http-errors');
 const Origin = require('../model/origin');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 exports.createOrigin = function(originData) {
   debug('creating origin');
@@ -58,8 +59,15 @@ exports.fetchAllOrigins = function() {
   });
 };
 
+exports.fetchOriginsByMethodId = function(methodId) {
+  debug('fetching all origins by method id');
+  return new Promise((resolve, reject) => {
+    Origin.find({recMethod: new ObjectId(methodId)})
+    .then(resolve)
+    .catch(reject);
+  });
+};
 
 exports.removeAllOrigins = function() {
   return Origin.remove({});
 };
-
