@@ -11,7 +11,6 @@ const debug = require('debug')('brewBuddy:brew-method-route-test');
 const brewMethodController = require('../controller/brew-method-controller');
 const authController = require('../controller/auth-controller');
 const userController = require('../controller/user-controller');
-const originController = require('../controller/origin-controller');
 
 const port = process.env.PORT || 3000;
 const baseUrl = `localhost:${port}/api`;
