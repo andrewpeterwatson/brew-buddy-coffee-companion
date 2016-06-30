@@ -32,7 +32,16 @@ originRouter.get('/origin', (req, res, next) => {
   debug('GET /api/orign');
   next(httpErrors(400, 'no ide provided'));
 });
-
+//David added this here///
+originRouter.get('/origin/search', parseBearerAuth, (req, res, next) => {
+  debug('SEARCH /api/all/search');
+  originController.fetchRecmethodByCountry(req.query.country)
+  .then(country => {
+   // console.log('@@@@@@@@@@@@@@@@@@', country);
+    res.json(country);
+  })
+ .catch(next);
+});
 
 originRouter.get('/origin/:id', parseBearerAuth, (req, res, next) => {
   debug('GET /api/origin/:id', req.params.id);
@@ -59,16 +68,4 @@ originRouter.delete('/origin/:id', parseBearerAuth, (req, res, next) => {
   originController.removeOrigin(req.params.id)
   .then(() => res.status(204).send())
   .catch(next);
-});
-
-
-//Take a look at this before mergign
-originRouter.get('/origin/search', parseBearerAuth, (req, res, next) => {
-  debug('SEARCH /api/all/search');
-  originController.fetchRecmethodByCountry(req.query.country)
-  .then(country => {
-   // console.log('@@@@@@@@@@@@@@@@@@', country);
-    res.json(country);
-  })
- .catch(next);
 });

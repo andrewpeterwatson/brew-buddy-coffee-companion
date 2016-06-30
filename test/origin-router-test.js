@@ -209,6 +209,7 @@ describe('testing module origin-router', () => {
         });
 
         it('should return a origin', (done) => {
+          console.log('TOKEN:', testOrigin);
           request.get(`${baseUrl}/origin/${testOrigin._id}`)
           .set({
             Authorization: `Bearer ${this.tempToken}`
@@ -256,7 +257,7 @@ describe('testing module origin-router', () => {
           .then(() => done())
           .catch(done);
         });
-
+      //
         it('should return an array of origins', (done) => {
           request.get(`${baseUrl}/origin/all`)
           .set({
@@ -323,11 +324,7 @@ describe('testing module origin-router', () => {
         var testOrigin = {};
         debug('testOrigin:', testOrigin);
         debug('TOKEN: ', TOKEN);
-        authController
-        .signup({username:'namasdeuse3', password:'88881asds0000'})
-        .then( (token) => {
-          TOKEN = token;
-        });
+
         return brewMethodController
         .createBrewMethod({
           title: 'ABC'
@@ -341,27 +338,18 @@ describe('testing module origin-router', () => {
            country: 'Coolio',
            recMethod: brewMethod._id
          })
-           .then((origin) => {
-             testOrigin = origin;
-             done();
-           });
+        .then((origin) => {
+          testOrigin = origin;
+          done();
         });
-      });
-      after((done) => {
-        Promise.all([
-          userController.removeAllUsers(),
-          originController.removeAllOrigins(),
-          brewMethodController.removeAllBrewMethods()
-        ])
-        .then(() => done())
-        .catch(done);
+        });
       });
 
       it('should return country + recMethod', (done) => {
-        debug('~~~~~~~~~~~~search IT block', TOKEN);
+        debug('~~~~~~~~~~~~search IT block', this.tempToken);
         request.get(`${baseUrl}/origin/search?country=Coolio`)
         .set({
-          Authorization: `Bearer ${TOKEN}`
+          Authorization: `Bearer ${this.tempToken}`
         })
         .then((res) => {
           expect(res.status).to.equal(200);
@@ -374,6 +362,7 @@ describe('testing module origin-router', () => {
         .set({
           Authorization: `Bearer ${this.tempToken}`
         })
+        .then(done)
         .catch((err) => {
           expect(err.response.status).to.equal(404);
           expect(err.response.text).to.eql('NotFoundError');
@@ -392,7 +381,5 @@ describe('testing module origin-router', () => {
         .catch(done);
       });
     });
-
   });
 });
-// });
