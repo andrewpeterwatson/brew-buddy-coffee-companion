@@ -60,10 +60,10 @@ exports.fetchAllOrigins = function() {
   });
 };
 
-
 exports.removeAllOrigins = function() {
   return Origin.remove({});
 };
+<<<<<<< HEAD
 
 
 
@@ -83,3 +83,5 @@ exports.fetchRecmethodByCountry = function(country) {
    .catch(reject);
   });
 };
+=======
+>>>>>>> 549ee1674c7f78e2d3be050645ed8d49ebc4f50a

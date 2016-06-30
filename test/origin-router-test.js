@@ -193,7 +193,6 @@ describe('testing module origin-router', () => {
         });
 
       });
-///////////
 
       describe('GET /api/origin', () => {
         let testOrigin = {};
@@ -257,7 +256,7 @@ describe('testing module origin-router', () => {
           .then(() => done())
           .catch(done);
         });
-      //
+
         it('should return an array of origins', (done) => {
           request.get(`${baseUrl}/origin/all`)
           .set({
