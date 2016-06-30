@@ -178,131 +178,196 @@ describe('testing module flavor-router', () => {
     });
   });
 
-  describe('testing flavor/:id/entries', () => {
-    beforeEach((done) => {
-      authController.signup({username: 'Kyle', password:'Justin'})
-        .then(token => {
-          this.tempToken = token;
-          return token;
-        })
-          .then((token) => {
-            return request.post(`${baseURL}/method`)
-            .send({
-              title: 'RimRafBrew',
-              recipe: 'First Rim. Then Raf. Repeat',
-              brewRatio: 3,
-              brewTimer: 3
-            })
-            .set({
-              Authorization: `Bearer ${token}`
-            });
-          })
-          .then(res => {
-            this.tempBrewMethod = res.body._id;
-            return request.post(`${baseURL}/origin`)
-            .send({
-              country: 'Spokanistan'
-              ,recMethod: this.tempBrewMethod._id
-            })
-            .set({
-              Authorization: `Bearer ${this.tempToken}`
-            });
-          })
-          .then(res => {
-            this.tempOrigin = res.body._id;
-          })
-          .then( () => {
-            return request.post(`${baseURL}/flavor`)
-            .send({
 
-              category: 'Sugars'
-              , flavorType: 'chocaltey'
-              , title: 'the dope flavor'
-              , adjective: ['fast', 'slow']
-            })
-            .set({
-              Authorization: `Bearer ${this.tempToken}`
-            });
-          })
-          .then(res => {
-            this.tempFlavor2 = res.body._id;
-          })
-          .then( () => {
-            return request.post(`${baseURL}/entry`)
-            .send({
-              date: new Date()
-              , aromas: ['feet', 'garbage', 'dirty diapers']
-              , acidity: 'low'
-              , body: 'bold'
-              , finish: 'smooth'
-              , experience: 'dopeness'
-              , rating: 4
-              , username: 'Kyle'
-              , methodId: this.tempBrewMethod
-              , originId: this.tempOrigin
-              , flavorId: this.tempFlavor2
-            })
-            .set({
-              Authorization: `Bearer ${this.tempToken}`
-            });
-          })
-          .then(res => {
-            this.tempEntry = res.body._id;
-            debug('FUCKING CREATING ENTRY ****************************************');
-            console.log('this.entry', this.tempEntry);
-            done();
-          })
-          .catch(done);
+  describe('testing entry-routes', function() {
+    before((done) => {
+      debug('before entry-routes');
+      if(!server.isRunning) {
+        server.listen(port, () => {
+          server.isRunning = true;
+          debug('server is up ::', `${port}`);
+          done();
+        });
+        return;
+      }
+      done();
     });
 
-    afterEach((done) => {
-      Promise.all([
-        userController.removeAllUsers()
-        , entryController.removeAllEntries()
-        , originController.removeAllOrigins()
-        , brewMethodController.removeAllBrewMethods()
-      ])
-      .then(() => done())
-      .catch(done);
-    });
-  });
-
-  it('should return an array of entries', (done) => {
-    request.get(`${baseURL}/flavor/${this.tempFlavor2._id}/entries`)
-      .set({Authorization: `Bearer ${this.tempToken}`})
-      .then(res => {
-        expect(res.body).to.be.an('Array');
-        console.log('res.body', res.body);
-        expect(res.body.length).to.equal(1);
-      })
-      .catch(done);
-  });
-
-
-
-  describe('testing PUT api/flavor', function() {
     after((done) => {
-      debug('remove users');
-      Promise.all ([
-        userController.removeAllUsers()
+      if(server.isRunning) {
+        server.close(() => {
+          server.isRunning = false;
+          debug('server is down');
+          done();
+        });
+        return;
+      }
+      done();
+    });
+
+    describe('testing entry-routes', function() {
+      before((done) => {
+        debug('before entry-routes');
+        if(!server.isRunning) {
+          server.listen(port, () => {
+            server.isRunning = true;
+            debug('server is up ::', `${port}`);
+            done();
+          });
+          return;
+        }
+        done();
+      });
+
+      after((done) => {
+        if(server.isRunning) {
+          server.close(() => {
+            server.isRunning = false;
+            debug('server is down');
+            done();
+          });
+          return;
+        }
+        done();
+      });
+
+      describe('testing module entry-router', function() {
+        beforeEach((done) => {
+          authController.signup({username: 'Kyle', password:'Justin'})
+          .then(token => {
+            this.tempToken = token;
+            return token;
+          })
+            .then((token) => {
+              return request.post(`${baseURL}/method`)
+              .send({
+                title: 'RimRafBrew',
+                recipe: 'First Rim. Then Raf. Repeat',
+                brewRatio: 3,
+                brewTimer: 3
+              })
+              .set({
+                Authorization: `Bearer ${token}`
+              });
+            })
+            .then(res => {
+              this.tempBrewMethod = res.body._id;
+              return request.post(`${baseURL}/origin`)
+              .send({
+                country: 'Spokanistan'
+                ,recMethod: this.tempBrewMethod._id
+              })
+              .set({
+                Authorization: `Bearer ${this.tempToken}`
+              });
+            })
+            .then(res => {
+              this.tempOrigin = res.body._id;
+            })
+            .then( () => {
+              return request.post(`${baseURL}/flavor`)
+              .send({
+
+                category: 'Sugars'
+                , flavorType: 'chocaltey'
+                , title: 'the dope flavor'
+                , adjective: ['fast', 'slow']
+              })
+              .set({
+                Authorization: `Bearer ${this.tempToken}`
+              });
+            })
+            .then(res => {
+              this.tempFlavor = res.body._id;
+            })
+            .then( () => {
+              return request.post(`${baseURL}/entry`)
+              .send({
+                date: new Date()
+                , aromas: ['feet', 'garbage', 'dirty diapers']
+                , acidity: 'low'
+                , body: 'bold'
+                , finish: 'smooth'
+                , experience: 'dopeness'
+                , rating: 4
+                , username: 'Kyle'
+                , methodId: this.tempBrewMethod
+                , originId: this.tempOrigin
+                , flavorId: this.tempFlavor
+              })
+              .set({
+                Authorization: `Bearer ${this.tempToken}`
+              });
+            })
+            .then(res => {
+              this.tempEntry = res.body._id;
+              this.flavorId = res.body.flavorId;
+              done();
+            })
+            .catch(done);
+        });
+
+        afterEach((done) => {
+          Promise.all([
+            userController.removeAllUsers()
+          , entryController.removeAllEntries()
+          , originController.removeAllOrigins()
+          , brewMethodController.removeAllBrewMethods()
+          ])
+        .then(() => done())
+        .catch(done);
+        });
+
+
+        describe('testing /api/flavor/:id/entries', () => {
+          it('should return an array of entries', (done) => {
+            request.get(`${baseURL}/flavor/${this.flavorId}/entries`)
+            .set({Authorization: `Bearer ${this.tempToken}`})
+            .then(res => {
+              expect(res.body).to.be.an('Array');
+              expect(res.body.length).to.equal(1);
+              done();
+            })
+            .catch(done);
+          });
+        });
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+      describe('testing PUT api/flavor', function() {
+        after((done) => {
+          debug('remove users');
+          Promise.all ([
+            userController.removeAllUsers()
          , flavorController.removeAllFlavor()
-      ])
+          ])
        .then(() => done())
        .catch(done);
-    });
+        });
 
-    before((done) => {
-      debug('hitting module flavor test');
-      authController.signup({username: 'dylan', password: 'davide'})
+        before((done) => {
+          debug('hitting module flavor test');
+          authController.signup({username: 'dylan', password: 'davide'})
      .then(token =>  this.tempToken = token)
      .then(() => flavorController.createFlavor({category: 'sugars', flavorType: 'cinnamon', title: 'lemon'}))
      .then((flavor) => this.tempFlavor = flavor)
      .then( () => done() )
      .catch(done);
-    });
+        });
 
-    it('should return return a flavor', (done) => {
-      request.put(`${baseURL}/flavor/${this.tempFlavor._id}`)
+        it('should return return a flavor', (done) => {
+          request.put(`${baseURL}/flavor/${this.tempFlavor._id}`)
       .set({Authorization: `Bearer ${this.tempToken}`})
       .send({category: 'Sugars', flavorType: 'cinnamon', title: 'lemon'})
       .then(res => {
@@ -310,47 +375,49 @@ describe('testing module flavor-router', () => {
         done();
       }).catch(done);
 
-    });
+        });
 
-    it('should return a 400 if no flavor is sent', (done) => {
-      request.put(`${baseURL}/flavor/${this.tempFlavor._id}`)
+        it('should return a 400 if no flavor is sent', (done) => {
+          request.put(`${baseURL}/flavor/${this.tempFlavor._id}`)
       .set({Authorization: `Bearer ${this.tempToken}`})
       .catch((err) => {
         expect(err.response.status).to.equal(400);
         done();
       });
-    });
-  });
+        });
+      });
 
 
-  describe('testing DELETE api/flavor', () => {
-    after((done) => {
-      debug('remove users');
-      Promise.all ([
-        userController.removeAllUsers()
+      describe('testing DELETE api/flavor', () => {
+        after((done) => {
+          debug('remove users');
+          Promise.all ([
+            userController.removeAllUsers()
          , flavorController.removeAllFlavor()
-      ])
+          ])
        .then(() => done())
        .catch(done);
-    });
+        });
 
-    before((done) => {
-      debug('hitting module flavor test');
-      authController.signup({username: 'dylan', password: 'davide'})
+        before((done) => {
+          debug('hitting module flavor test');
+          authController.signup({username: 'dylan', password: 'davide'})
      .then(token =>  this.tempToken = token)
      .then(() => flavorController.createFlavor({category: 'Sugars', flavorType: 'cinnamon', title: 'lemon'}))
      .then((flavor) => this.tempFlavor = flavor)
      .then( () => done() )
      .catch(done);
-    });
+        });
 
-    it('should return a 204', (done) => {
-      request.del(`${baseURL}/flavor/${this.tempFlavor._id}`)
+        it('should return a 204', (done) => {
+          request.del(`${baseURL}/flavor/${this.tempFlavor._id}`)
       .set({Authorization: `Bearer ${this.tempToken}`})
       .then(res => {
         expect(res.status).to.equal(204);
         done();
       }).catch(done);
+        });
+      });
     });
   });
 });
