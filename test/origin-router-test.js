@@ -354,6 +354,7 @@ describe('testing module origin-router', () => {
         })
         .catch(done);
       });
+
       it('should return a 404 if no origin is found', (done) => {
         request.get(`${baseUrl}/origin/fakeOrigin`)
         .set({

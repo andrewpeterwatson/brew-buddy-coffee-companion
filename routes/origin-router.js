@@ -27,7 +27,6 @@ originRouter.get('/origin/all', parseBearerAuth, (req, res, next) => {
   .catch(next);
 });
 
-
 originRouter.get('/origin', (req, res, next) => {
   debug('GET /api/orign');
   next(httpErrors(400, 'no ide provided'));

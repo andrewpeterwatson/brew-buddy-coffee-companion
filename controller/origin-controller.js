@@ -70,7 +70,6 @@ exports.fetchRecmethodByCountry = function(country) {
     Origin.findOne({country: country})
     .then((country) => {
       country.recMethod;
-
     })
 
    .then((recMethod) => Method.find({_id: recMethod}))
