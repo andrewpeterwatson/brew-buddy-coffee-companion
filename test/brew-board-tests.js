@@ -159,7 +159,6 @@ describe('testing brewBoard-route', function() {
 //Testing GET on Brew Board
   describe('GET /api/brewBoard', () => {
     before((done) => {
-      console.log('hit first');
       createBuddy()
       .then( entry => {
         this.entry = entry;
