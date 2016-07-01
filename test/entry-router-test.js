@@ -23,7 +23,6 @@ const server = require('../server');
 request.use(superPromise);
 
 
-
 describe('testing entry-routes', function() {
   before((done) => {
     debug('before entry-routes');
@@ -86,9 +85,10 @@ describe('testing entry-routes', function() {
         .then( () => {
           return request.post(`${baseUrl}/flavor`)
           .send({
-            flavorType: 'chocaltey'
+
+            category: 'Sugars'
+            , flavorType: 'chocaltey'
             , title: 'the dope flavor'
-            , adjective: ['fast', 'slow']
           })
           .set({
             Authorization: `Bearer ${this.tempToken}`
@@ -111,6 +111,7 @@ describe('testing entry-routes', function() {
             , methodId: this.tempBrewMethod
             , originId: this.tempOrigin
             , flavorId: this.tempFlavor
+            , privacy: false
           })
           .set({
             Authorization: `Bearer ${this.tempToken}`
@@ -134,8 +135,6 @@ describe('testing entry-routes', function() {
     .catch(done);
     });
 
-
-
     //POST 200
     describe('testing POST on /api/entry', () => {
       it('should return a entry', (done) => {
@@ -152,6 +151,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .set({Authorization: `Bearer ${this.tempToken}`})
       .then(res => {
@@ -162,7 +162,6 @@ describe('testing entry-routes', function() {
       });
     });
 
-  //POST 400
     describe('testing POST on /api/entry with bad data', () => {
       it('should return a 400 bad request', (done) => {
         request.post(`${baseUrl}/entry`)
@@ -178,6 +177,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .set({Authorization: `Bearer ${this.tempToken}`})
       .then(done)
@@ -211,6 +211,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .then(done)
       .catch((err) => {
@@ -225,7 +226,7 @@ describe('testing entry-routes', function() {
       });
       });
     });
-  //GET Tests
+
     describe('GET /api/entry', () => {
       it('should return a entry', (done) => {
         request.get(`${baseUrl}/entry/${this.tempEntry}`)
@@ -259,6 +260,7 @@ describe('testing entry-routes', function() {
       });
       });
     });
+
 //Get all
     describe('GET /api/entry/all', () => {
       before((done) => {
@@ -275,6 +277,7 @@ describe('testing entry-routes', function() {
             , methodId: this.tempBrewMethod
             , originId: this.tempOrigin
             , flavorId: this.tempFlavor
+            , privacy: false
           }),
           entryController.createEntry({
             date: new Date()
@@ -288,6 +291,7 @@ describe('testing entry-routes', function() {
             , methodId: this.tempBrewMethod
             , originId: this.tempOrigin
             , flavorId: this.tempFlavor
+            , privacy: false
           })
         ])
         .then(() => done())
@@ -295,7 +299,7 @@ describe('testing entry-routes', function() {
       });
 
       it('should return an array of entries', (done) => {
-        request.get(`${baseUrl}/entry/all`)
+        request.get(`${baseUrl}/entry/all/Kyle`)
         .set({
           Authorization: `Bearer ${this.tempToken}`
         })
@@ -309,7 +313,6 @@ describe('testing entry-routes', function() {
       });
     });
 
-//PUT testing
     describe('PUT /api/entry/:id', () => {
       before((done) => {
         entryController.createEntry({
@@ -324,6 +327,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
         })
       .then((entry) => {
         this.testEntry = entry;
@@ -345,6 +349,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .set({
         Authorization: `Bearer ${this.tempToken}`
@@ -370,6 +375,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .catch((err) => {
         expect(err.response.status).to.equal(401);
@@ -402,6 +408,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
       })
       .set({
         Authorization: `Bearer ${this.tempToken}`
@@ -413,7 +420,6 @@ describe('testing entry-routes', function() {
       });
     });
 
-  //DELETE routes
     describe('DELETE /api/entry/:id', () => {
       before((done) => {
         entryController.createEntry({
@@ -428,6 +434,7 @@ describe('testing entry-routes', function() {
         , methodId: this.tempBrewMethod
         , originId: this.tempOrigin
         , flavorId: this.tempFlavor
+        , privacy: false
         })
       .then((entry) => {
         this.testEntry = entry;
@@ -466,6 +473,33 @@ describe('testing entry-routes', function() {
       });
       });
     });
-  });
 
+    describe('GET /api/entry/search', () => {
+      it('should return a result', (done) => {
+        debug('searching entries');
+        request.get(`${baseUrl}/entry/search?body=bold`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then((res) => {
+          expect(res.status).to.equal(200);
+          done();
+        })
+        .catch(done);
+      });
+
+      it('should return a 204 if nothing is found', (done) => {
+        debug('testing for 204 search');
+        request.get(`${baseUrl}/entry/search?body=fuckoff`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then((res) => {
+          expect(res.status).to.equal(204);
+          done();
+        })
+        .catch(done);
+      });
+    });
+  });
 });

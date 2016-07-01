@@ -19,6 +19,8 @@ const server = require('../server');
 
 request.use(superPromise);
 
+var TOKEN;
+
 describe('testing module origin-router', () => {
   before((done) => {
     debug('before module-auth');
@@ -82,7 +84,6 @@ describe('testing module origin-router', () => {
       .catch(done);
     });
 
-    //begin testing here
     describe('testing /api/origin', () => {
       describe('POST /api/origin', () => {
         it('should return an origin', (done) => {
@@ -312,6 +313,70 @@ describe('testing module origin-router', () => {
             done();
           });
         });
+      });
+    });
+
+    describe('GET: /api/origin/method', () => {
+      before((done) => {
+        var testOrigin = {};
+        debug('testOrigin:', testOrigin);
+        debug('TOKEN: ', TOKEN);
+
+        return brewMethodController
+        .createBrewMethod({
+          title: 'ABC'
+          , recipe: 'shity'
+          , brewRatio: 1
+          , brewTimer: 4
+        })
+        .then((brewMethod) => {
+          return originController
+         .createOrigin({
+           country: 'Coolio',
+           recMethod: brewMethod._id
+         })
+        .then((origin) => {
+          testOrigin = origin;
+          done();
+        });
+        });
+      });
+
+      it('should return country + recMethod', (done) => {
+        debug('~~~~~~~~~~~~method IT block', this.tempToken);
+        request.get(`${baseUrl}/origin/method?country=Coolio`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then((res) => {
+          expect(res.status).to.equal(200);
+          done();
+        })
+        .catch(done);
+      });
+
+      it('should return a 404 if no origin is found', (done) => {
+        request.get(`${baseUrl}/origin/fakeOrigin`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`
+        })
+        .then(done)
+        .catch((err) => {
+          expect(err.response.status).to.equal(404);
+          expect(err.response.text).to.eql('NotFoundError');
+          done();
+        });
+      });
+
+      it('should return a 401 if no token is sent', (done) => {
+        request.get(`${baseUrl}/origin/method?country=Coolio`)
+        .then(done)
+        .catch((err) => {
+          expect(err.response.status).to.equal(401);
+          expect(err.response.text).to.eql('UnauthorizedError');
+          done();
+        })
+        .catch(done);
       });
     });
   });

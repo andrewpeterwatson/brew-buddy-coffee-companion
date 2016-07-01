@@ -32,6 +32,16 @@ originRouter.get('/origin', (req, res, next) => {
   next(httpErrors(400, 'no ide provided'));
 });
 
+
+originRouter.get('/origin/method', parseBearerAuth, (req, res, next) => {
+  debug('SEARCH /api/all/search');
+  originController.fetchRecmethodByCountry(req.query.country)
+  .then(country => {
+    res.json(country);
+  })
+ .catch(next);
+});
+
 originRouter.get('/origin/:id', parseBearerAuth, (req, res, next) => {
   debug('GET /api/origin/:id', req.params.id);
   originController.fetchOrigin(req.params.id)

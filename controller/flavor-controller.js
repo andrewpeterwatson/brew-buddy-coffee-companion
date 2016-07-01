@@ -8,7 +8,6 @@ const httpErrors = require('http-errors');
 exports.createFlavor = function(reqBody) {
   debug('createFlavor');
   return new Promise((resolve, reject) =>{
-
     new Flavor(reqBody)
     .save()
     .then((flavor) => {
@@ -24,6 +23,13 @@ exports.fetchFlavor = function(flavorId) {
     Flavor.findOne({_id: flavorId})
     .then(flavor => resolve(flavor))
     .catch(err => reject(httpErrors(400, err.message)));
+  });
+};
+exports.fetchAllFlavors = function() {
+  return new Promise((resolve, reject) => {
+    Flavor.find({})
+      .then(resolve)
+      .catch(reject);
   });
 };
 
