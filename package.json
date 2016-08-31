@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node server.js",
     "lint": "./node_modules/eslint/bin/eslint.js ./",
-    "test": "./node_modules/mocha/bin/mocha "
+    "test": "./node_modules/mocha/bin/mocha ",
+    "start:dev": "DEBUG=brewbuddy* nodemon server.js"
   },
   "repository": {
     "type": "git",

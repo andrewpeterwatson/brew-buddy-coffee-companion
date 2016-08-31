@@ -21,8 +21,13 @@
  const port = process.env.PORT || 3000;
  const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/authdev';
 
- mongoose.connect(mongoURI);
+ console.log(process.env.npm_config_dev_url);
+ console.log(process.env.npm_config_app_secret);
 
+ process.env.APP_SECRET = process.env.APP_SECRET || process.env.npm_config_app_secret;
+
+ mongoose.connect(mongoURI);
+ console.log('process.env.APP_SECRET: ', process.env.APP_SECRET);
  app.use(morgan('dev'));
  app.use(cors());
 

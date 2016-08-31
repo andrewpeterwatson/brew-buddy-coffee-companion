@@ -19,6 +19,7 @@ userSchema.methods.generateHash = function(password){
   return new Promise((resolve, reject) => {
     if (!password) return reject(httpErrors(400, 'must provide password'));
     bcrypt.hash(password, 8, (err, hash) => {
+      if (err) console.log('THIS IS WHERE THE ERR WAS: ', err);
       if (err) return reject(err);
       this.password = hash;
       resolve(this);
