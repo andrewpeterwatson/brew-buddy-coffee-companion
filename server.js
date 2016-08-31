@@ -2,6 +2,7 @@
 
  const express = require('express');
  const morgan = require('morgan');
+ const cors = require('cors');
  const mongoose = require('mongoose');
  const httpErrors = require('http-errors');
  const debug = require('debug')('brewbuddie:server');
@@ -23,6 +24,7 @@
  mongoose.connect(mongoURI);
 
  app.use(morgan('dev'));
+ app.use(cors());
 
 
 
