@@ -26,10 +26,6 @@
  app.use(morgan('dev'));
  app.use(cors());
 
-
-
-
-
  app.all('/', parserBearerAuth, function(req, res){
    res.send('a Cup of Coffee!');
  });
