@@ -6,6 +6,7 @@ const httpErrors = require('http-errors');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 exports.createEntry = function(entryData){
+  console.log('BE create hit', entryData);
   debug('createEntry');
   return new Promise((resolve, reject) => {
     new Entry(entryData).save()
