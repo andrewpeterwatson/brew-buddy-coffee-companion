@@ -10,6 +10,7 @@ const entryRouter = module.exports = new Router();
 
 entryRouter.post('/entry', parseBearerAuth, jsonParser, function(req, res, next){
   debug('Post: /api/entry');
+  console.log('BE route POST', req.body);
   entryController.createEntry(req.body)
   .then( entry => res.json(entry))
   .catch(next);
